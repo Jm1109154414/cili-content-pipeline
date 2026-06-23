@@ -10,10 +10,10 @@
 → Genera la estrategia del mes y el copy de cada post.
 → Es el que mejor escribe en español, natural, no genérico.
 
-**Ideogram** — el que diseña las imágenes
+**GPT Image 2 (OpenAI)** — el que diseña las imágenes
 → Genera la imagen de cada post.
-→ Es de los pocos que meten texto y datos legibles DENTRO de la imagen —
-  justo el estilo de CiLi (infografías, sin foto de stock).
+→ El más preciso del mercado metiendo texto y datos legibles DENTRO de la
+  imagen — justo el estilo de CiLi (infografías, sin foto de stock).
 
 **Excel** — el entregable final
 → Todo llega a una tabla simple que el equipo revisa y aprueba.
@@ -31,7 +31,7 @@
 
 ## El número que más les va a importar
 
-> "Cuesta ~$26 pesos por cliente al mes en herramientas de IA.
+> "Cuesta ~$36 pesos por cliente al mes en herramientas de IA.
 > El costo real no es la tecnología — es el tiempo de revisión humana."
 
 ---

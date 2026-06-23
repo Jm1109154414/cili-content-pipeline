@@ -1,13 +1,14 @@
 ---
 name: imagenes
-description: Genera la imagen final de cada post del mes (vía Ideogram 3.0), a partir de la salida del skill estrategia-copy y los estándares de marca del brief. Usar después de que estrategia-copy produjo el contenido del mes, antes del chequeo de marca y del entregable final.
+description: Genera la imagen final de cada post del mes (vía GPT Image 2 de OpenAI), a partir de la salida del skill estrategia-copy y los estándares de marca del brief. Usar después de que estrategia-copy produjo el contenido del mes, antes del chequeo de marca y del entregable final.
 ---
 
 # Generación de imágenes
 
 Generas la imagen final de cada post, alineada a la marca del cliente, usando
-**Ideogram 3.0** (especializado en tipografía y texto legible dentro de
-imagen — el motor elegido en `COSTOS.md` y `PLAN_MAESTRO.md`).
+**GPT Image 2** (de OpenAI — mismo proveedor que ya usamos para validar texto
+con modelos hermanos; ~99% de precisión de texto dentro de imagen, soporta 4K
+y texto denso/multilenguaje — el motor elegido en `COSTOS.md` y `PLAN_MAESTRO.md`).
 
 ## Cuándo se usa
 
@@ -24,16 +25,19 @@ chequeo de marca y de armar el entregable final (`output_formatter.py`).
 
 ## Paso 1 — Construir el prompt de imagen (por post)
 
-Para cada post, escribe un prompt en **inglés** para Ideogram 3.0 que incluya:
+Para cada post, escribe un prompt en **inglés** para GPT Image 2 que incluya:
 
 - **Estilo:** uno de `tipographic | infographic | abstract | diagram | dark_corporate`,
   elegido según `estilo_visual` del brief y el `tipo` del post.
 - **Colores:** deben respetar `colores_hex` del brief — menciónalos explícitamente
-  en el prompt (Ideogram sigue bien instrucciones de paleta).
+  en el prompt (GPT Image 2 sigue bien instrucciones de paleta y composición).
 - **Texto/datos dentro de la imagen:** si el post lleva un dato, cifra o frase
   corta (el `gancho`, o un número del brief como "+2,000 certificados"),
-  inclúyelo explícitamente en el prompt — es la fortaleza de Ideogram 3.0,
-  úsala.
+  inclúyelo explícitamente en el prompt — GPT Image 2 tiene la mayor precisión
+  de texto del mercado (~99% de caracteres correctos), úsala.
+- **Jerarquía visual:** como GPT Image 2 es más fuerte en precisión de texto
+  que en "instinto de diseño editorial", sé explícito en el prompt sobre qué
+  es título vs. subtítulo vs. dato de apoyo — no asumas que lo va a priorizar solo.
 - **Qué evitar:** nunca fotografía de stock de personas sonriendo en oficina,
   nunca watermarks, nunca texto genérico de relleno. Respeta también el campo
   `evitar` del brief.
@@ -55,11 +59,11 @@ Reglas duras (no negociables, igual para cualquier cliente):
 | Facebook | 1200x630px |
 | TikTok cover | 1080x1920px |
 
-## Paso 3 — Generar con Ideogram 3.0
+## Paso 3 — Generar con GPT Image 2
 
-Usa la tool nativa de imagen de OpenClaw apuntando a Ideogram 3.0 (tier turbo,
-$0.03/imagen — ver `COSTOS.md`). Si Ideogram no está disponible o falla,
-plan B en este orden: Imagen 4 (Google) → GPT Image 1.5.
+Usa la tool nativa de imagen de OpenClaw apuntando a GPT Image 2, calidad
+"medium" (~$0.05/imagen — ver `COSTOS.md`). Si GPT Image 2 no está disponible
+o falla, plan B en este orden: Ideogram 4.0 → Imagen 4 (Google).
 
 Guarda cada imagen en `output/{cliente}/{mes}/imagenes/post_{NN}_{plataforma}_{fecha}/imagen.png`,
 y junto a ella un `copy.txt` con el `copy_completo` de ese post (para que el

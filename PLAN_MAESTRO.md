@@ -55,7 +55,7 @@ prompts blindados para todo lo demás; OpenClaw como cerebro que coordina.
 | Cron (scheduler) | Disparar el contenido el día 1 de cada mes (reemplaza n8n) |
 | Memoria por sesión/cliente | Reanudar conversaciones, recordar clientes recurrentes |
 | Navegador + búsqueda web | Pre-llenar el brief leyendo web y redes del cliente |
-| image_generate | Generación de imágenes — **Ideogram 3.0** elegido (especializado en tipografía/texto dentro de imagen, $0.03/img) |
+| image_generate | Generación de imágenes — **GPT Image 2** elegido (OpenAI, ~99% precisión de texto dentro de imagen, ~$0.05/img) |
 | video_generate | Reels y TikToks en video real — **Kling 3.0** elegido ($0.10/seg, buen equilibrio calidad/precio). Fase futura |
 | tts (texto a voz) | Voiceover de los Reels — OpenAI TTS (~$0.015/min). Fase futura |
 | music_generate | Música de fondo sin copyright — Suno (~$0.05-0.11/canción). Fase futura |
@@ -137,7 +137,7 @@ Gracias a que OpenClaw absorbe trabajo, pasamos de **8 archivos Python** a
 | output_formatter.py | ✅ Se queda (armar Excel) |
 | strategy_generator.py | → ✅ Skill construido: `skills/estrategia-copy/SKILL.md` |
 | copy_generator.py | → ✅ Fusionado en el mismo skill `estrategia-copy` |
-| image_generator.py | → ✅ Skill construido: `skills/imagenes/SKILL.md` (Ideogram 3.0) |
+| image_generator.py | → ✅ Skill construido: `skills/imagenes/SKILL.md` (GPT Image 2) |
 | image_prompt_generator.py | ❌ Se fusiona (un paso menos) |
 | pipeline.py (orquestador) | ❌ Lo reemplaza OpenClaw |
 | utils.py (retry + reanudación) | ❌ Innecesario (OpenClaw ya lo trae) |
@@ -152,7 +152,7 @@ en el guión del skill conversacional.
 ### AHORA (esta etapa) — bajo riesgo, alto valor
 1. ❌ Agente de onboarding por WebChat (con auto-fill de web/redes y memoria de cliente) — pendiente
 2. ✅ Skills de estrategia y copy — `skills/estrategia-copy/SKILL.md`
-3. ✅ Imágenes — `skills/imagenes/SKILL.md` (Ideogram 3.0)
+3. ✅ Imágenes — `skills/imagenes/SKILL.md` (GPT Image 2)
 4. ✅ Chequeo de marca — `skills/chequeo-marca/SKILL.md`
 5. ✅ Validación (brief_schema) + Excel (output_formatter) en código
 6. ❌ Notificación y aprobación por el medio configurable — pendiente

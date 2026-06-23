@@ -1,30 +1,34 @@
 # CiLi Content Pipeline
 
-Pipeline de contenido orgánico automatizado: dado el brief de un cliente, genera estrategia mensual, copies por plataforma, prompts de imagen y las imágenes finales (DALL-E 3), más un Excel/MD listos para revisión y publicación manual.
+Pipeline de contenido orgánico automatizado. La visión y arquitectura vigentes
+están en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo primero.
 
-## Setup
+## Qué hay en este repo
+
+| Carpeta/archivo | Qué es |
+|---|---|
+| `PLAN_MAESTRO.md` | La arquitectura vigente (OpenClaw como orquestador + skills) |
+| `COSTOS.md` | Estimación de costo de APIs por cliente al mes |
+| `briefs/FORMULARIO_ONBOARDING.md` | Guion de preguntas — base del skill conversacional de onboarding |
+| `briefs/_template_brief.json` | Plantilla vacía del brief de cliente |
+| `briefs/*.json` | Briefs de clientes ya capturados |
+| `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto (se queda en código) |
+| `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final (se queda en código) |
+| `prompts/*.txt` | Prompts de referencia — insumo para escribir los SKILL.md de OpenClaw |
+
+> **Nota:** los generadores de estrategia, copy e imagen (que antes eran scripts
+> Python sueltos) se retiraron de este repo. Según `PLAN_MAESTRO.md`, esa lógica
+> se construye como **skills de OpenClaw** (prompts blindados dentro de
+> `SKILL.md`), no como CLI manual. `prompts/*.txt` queda como insumo de
+> referencia para escribir esos skills.
+
+## Setup (para lo que sí es código)
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate        # Windows
 pip install -r requirements.txt
-copy .env.example .env        # y llena ANTHROPIC_API_KEY / OPENAI_API_KEY
 ```
-
-## Uso
-
-```bash
-python -m pipeline.pipeline --brief briefs/cili_julio_2026.json
-```
-
-El resultado queda en `output/{empresa}/{mes}/`:
-- `resumen_calendario.xlsx` — tabla para revisión del equipo
-- `resumen_calendario.md` — misma info en texto plano
-- `checklist_publicacion.md` — checklist post por post
-- `imagenes/` — una carpeta por post con `imagen.png` y `copy.txt`
-- `errores.log` — errores de generación de imagen, si los hay
-
-El pipeline es reanudable: si `strategy.json`, `copies.json` o `image_prompts.json` ya existen en la carpeta de salida, no se regeneran.
 
 ## Tests
 

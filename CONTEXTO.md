@@ -2,6 +2,13 @@
 ## Pipeline de Marketing Automatizado — CiLi
 ## Junio 2026 — v2.0
 
+> ⚠️ **Documento histórico.** Este es el plan original (CLI manual en Python,
+> DALL-E 3, n8n para automatizar). La arquitectura **vigente** está en
+> [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — OpenClaw como orquestador, Ideogram 3.0
+> para imagen, Kling 3.0 para video. Se conserva este archivo como bitácora del
+> razonamiento de negocio (quién es CiLi, el SIPOC de 7 etapas, reglas de
+> contenido por plataforma), que sigue siendo válido.
+
 ---
 ## QUIÉN ES CILI
 **CiLi** — Continuous Improvement & Leadership Institute

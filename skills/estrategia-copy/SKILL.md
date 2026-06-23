@@ -12,8 +12,8 @@ completo de cada post, para un cliente cuyo brief ya fue validado y confirmado.
 
 Después de que el agente de onboarding produjo el brief y el cliente lo
 confirmó (checkpoint 1). Recibes el brief completo (formato `ClientBrief`,
-ver `pipeline/brief_schema.py`) y, si el cliente es CiLi, el material de
-referencia adicional descrito abajo.
+ver `pipeline/brief_schema.py`) y, si el cliente tiene material de referencia
+propio, también ese (ver "Entrada" abajo).
 
 ## Entrada
 
@@ -71,29 +71,25 @@ referencia adicional descrito abajo.
 
 ## Reglas del copy (cómo escribir cada post)
 
-### Framework de mensaje — usar el de CiLi cuando aplique
+### Framework de mensaje — usa el del cliente si existe, no inventes uno genérico
 
-Si el cliente es CiLi, cada post debe construirse con su propio sistema de
-códigos (no inventar uno genérico):
+Si el material de referencia del cliente (ver "Entrada") define su propio
+sistema de códigos para estructurar mensajes, **úsalo tal cual está
+documentado ahí** — no lo sustituyas por uno genérico ni inventes otro.
 
-| Código | Significado | Qué cubre el post |
-|---|---|---|
-| P | Pilar | El tema general del post |
-| PR | Problema | El dolor concreto que dispara el contenido |
-| LM | Lead magnet | Si el post invita a descargar/probar algo |
-| B | Beneficios | Qué gana el lector |
-| C | Certeza | Prueba social, garantía, dato de respaldo |
-| TI | Tiempo invertido | Cuánto esfuerzo/tiempo le toma al cliente |
-| S | Sacrificio | Qué tiene que invertir/sacrificar el cliente |
-| I | Informativo | Valor puro, sin venta |
-| CN | Conectar | Cercanía/comunidad, sin venta directa |
+> Ejemplo real: CiLi tiene su propio framework de 9 códigos (Pilar, Problema,
+> Lead magnet, Beneficios, Certeza, Tiempo invertido, Sacrificio, Informativo,
+> Conectar) documentado en `examples/cili/cili_pilares_completo.md`. Cuando el
+> cliente sea CiLi, sigue ese framework exactamente como está ahí, no lo
+> reescribas de memoria.
 
-Cada post debe declarar en el JSON de salida qué código(s) cubre
-(`codigos_framework: ["PR", "B"]`, por ejemplo). Para clientes que no sean
-CiLi y no tengan su propio framework, usa el reparto de objetivos genérico
-(sección anterior) sin forzar estos códigos.
+Cuando el cliente tenga un framework propio, cada post debe declarar en el
+JSON de salida qué código(s) cubre (`codigos_framework: ["PR", "B"]`, usando
+los códigos exactos del cliente). **Si el cliente no tiene framework propio**,
+usa el reparto de objetivos genérico (sección anterior) sin forzar ningún
+código.
 
-### Patrón de gancho/CTA (validado en los ejemplos reales de CiLi)
+### Patrón de gancho/CTA
 
 El gancho es casi siempre **una pregunta directa al dolor o deseo del
 prospecto** ("¿Te imaginas un sistema que permita a tu equipo resolver

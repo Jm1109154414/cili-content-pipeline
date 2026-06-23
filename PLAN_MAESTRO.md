@@ -176,8 +176,8 @@ mismo cliente, el slug se calcula siempre así:
   (skills + `pipeline/`) sigue funcionando igual para cualquier cliente nuevo.
   CiLi vive aquí (`examples/cili/`) como el caso piloto con el que se prueba
   el sistema; incluye su brief de ejemplo, su material de pilares/banco de
-  temas, y la documentación de negocio específica de CiLi (`CONTEXTO.md`,
-  `COSTOS.md`, `TARJETA_JUNTA.md`). Si `clientes/{cliente}/` no existe,
+  temas, y la documentación de negocio específica de CiLi (`examples/cili/CONTEXTO.md`,
+  `examples/cili/COSTOS.md`, `examples/cili/TARJETA_JUNTA.md`). Si `clientes/{cliente}/` no existe,
   `estrategia-copy` revisa `examples/{cliente}/` como alternativa (solo
   relevante mientras se prueba con CiLi).
 
@@ -244,8 +244,10 @@ en el guión del skill conversacional.
 
 ## PENDIENTES DE NEGOCIO (para la junta)
 
-- **💰 Costo por cliente al mes:** ✅ ya estimado en `COSTOS.md` (~$36 MXN/mes
-  texto+imagen; ~$150-195 MXN/mes extra si se agrega video).
+- **💰 Costo por cliente al mes:** ✅ ya estimado en `examples/cili/COSTOS.md`
+  (~$36 MXN/mes texto+imagen; ~$150-195 MXN/mes extra si se agrega video,
+  con el supuesto de ~20 posts/mes de CiLi — recalcular si otro cliente tiene
+  otra frecuencia).
 - **API keys:** las llaves de Claude y OpenAI **no van en este repo** — este
   repo ya no ejecuta llamadas a esas APIs directamente (ver "QUÉ SE SIMPLIFICÓ").
   Las llaves se configuran dentro de OpenClaw (`~/.openclaw/openclaw.json` en

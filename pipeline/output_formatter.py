@@ -82,6 +82,7 @@ def generate_output(contenido: dict, brief: ClientBrief, output_dir: str | Path)
     ya consolidados por post_id, ver PLAN_MAESTRO.md).
     """
     output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     filas = _filas(contenido)
 
     xlsx_path = output_dir / "resumen_calendario.xlsx"

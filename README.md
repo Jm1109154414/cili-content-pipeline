@@ -42,6 +42,7 @@ primero.
 | `briefs/_template_brief.json` | Plantilla vacía del brief — válida para cualquier cliente |
 | `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto |
 | `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final |
+| `tests/` | Pruebas del motor — usan un fixture genérico propio (`tests/fixtures/`), no dependen de `examples/` |
 
 Los briefs reales de clientes en producción se guardan en
 `briefs/{cliente}_{mes}.json` (los crea `onboarding`). Si un cliente tiene

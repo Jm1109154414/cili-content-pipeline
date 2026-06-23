@@ -36,3 +36,14 @@ def test_generate_output_crea_archivos(tmp_path):
     contenido_md = Path(salidas["md"]).read_text(encoding="utf-8")
     assert "Gancho de prueba" in contenido_md
     assert "GENERADO" in contenido_md
+
+
+def test_generate_output_crea_directorio_si_no_existe(tmp_path):
+    brief = ClientBrief.from_json(BRIEF_VALIDO)
+    output_dir = tmp_path / "cliente" / "mes_que_no_existe_todavia"
+    assert not output_dir.exists()
+
+    salidas = generate_output(CONTENIDO, brief, output_dir)
+
+    assert output_dir.exists()
+    assert Path(salidas["xlsx"]).exists()

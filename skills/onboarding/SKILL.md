@@ -102,9 +102,10 @@ cuando confirme, continúa al paso final.
 
 Guarda el brief en `briefs/{cliente}_{mes}.json`. Si el cliente es nuevo,
 queda guardado completo para reutilizar el mes siguiente (solo la Sección F
-se repregunta). Notifica que el brief quedó listo para que el equipo
-proceda al checkpoint de aprobación de contenido más adelante (no aquí —
-este checkpoint es solo del cliente, no del equipo de CiLi).
+se repregunta). Notifica que el brief quedó listo para que el equipo que
+opera el servicio proceda con la generación de contenido más adelante (no
+aquí — este checkpoint es solo del cliente confirmando su brief, distinto del
+checkpoint 2 donde el equipo aprueba el contenido ya generado).
 
 ## Manejo de errores
 

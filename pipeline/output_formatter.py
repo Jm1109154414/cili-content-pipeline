@@ -9,8 +9,21 @@ from .historial import guardar_contenido_final
 
 COLUMNAS = [
     "No.", "Fecha", "Plataforma", "Tipo", "Objetivo", "Gancho",
-    "Copy completo", "Hashtags", "CTA", "Ruta imagen", "Estado",
+    "Copy completo", "Hashtags", "CTA", "Ruta imagen", "Estado", "Alertas",
 ]
+
+
+def _formatear_alertas(alertas: list[dict]) -> str:
+    """alertas_marca viene de chequeo-marca como [{categoria, severidad,
+    descripcion}, ...] — se muestra ordenada por severidad (alta primero)
+    para que el equipo que revisa solo el Excel (medio_aprobacion='excel')
+    sepa qué corregir sin tener que leer el chat de notificación."""
+    orden_severidad = {"alta": 0, "media": 1, "baja": 2}
+    ordenadas = sorted(alertas, key=lambda a: orden_severidad.get(a.get("severidad", "media"), 1))
+    return "; ".join(
+        f"[{a.get('categoria', '?')}/{a.get('severidad', '?')}] {a.get('descripcion', '')}"
+        for a in ordenadas
+    )
 
 
 def _filas(contenido: dict) -> list[dict]:
@@ -18,7 +31,7 @@ def _filas(contenido: dict) -> list[dict]:
     final y la ruta_imagen de estrategia-copy + imagenes (ver vocabulario
     único de estados e identificador de post en PLAN_MAESTRO.md).
     {"posts": [{post_id, fecha, plataforma, tipo, objetivo, gancho,
-    copy_completo, hashtags, cta, ruta_imagen, estado, ...}]}."""
+    copy_completo, hashtags, cta, ruta_imagen, estado, alertas_marca, ...}]}."""
     posts_contenido = contenido.get("posts", [])
 
     filas = []
@@ -36,6 +49,7 @@ def _filas(contenido: dict) -> list[dict]:
                 "CTA": post.get("cta", ""),
                 "Ruta imagen": post.get("ruta_imagen", ""),
                 "Estado": post.get("estado", "GENERADO"),
+                "Alertas": _formatear_alertas(post.get("alertas_marca", [])),
             }
         )
     return filas
@@ -65,6 +79,8 @@ def _generar_md(filas: list[dict], brief: ClientBrief, path: Path) -> None:
         lineas.append(f"- **CTA:** {fila['CTA']}")
         lineas.append(f"- **Imagen:** {fila['Ruta imagen']}")
         lineas.append(f"- **Estado:** {fila['Estado']}")
+        if fila["Alertas"]:
+            lineas.append(f"- **Alertas:** {fila['Alertas']}")
         lineas.append("")
     path.write_text("\n".join(lineas), encoding="utf-8")
 

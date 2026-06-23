@@ -1,5 +1,5 @@
 from pipeline.brief_schema import ClientBrief
-from pipeline.output_formatter import generate_output
+from pipeline.output_formatter import _formatear_alertas, generate_output
 from pathlib import Path
 
 # Fixture genérico, desacoplado de cualquier cliente real (no depende de
@@ -53,3 +53,37 @@ def test_generate_output_crea_directorio_si_no_existe(tmp_path):
 
     assert output_dir.exists()
     assert Path(salidas["xlsx"]).exists()
+
+
+def test_formatear_alertas_ordena_por_severidad():
+    alertas = [
+        {"categoria": "marca", "severidad": "baja", "descripcion": "tono casual"},
+        {"categoria": "legal", "severidad": "alta", "descripcion": "cifra no verificada"},
+    ]
+    resultado = _formatear_alertas(alertas)
+    assert resultado.startswith("[legal/alta] cifra no verificada")
+    assert "[marca/baja] tono casual" in resultado
+
+
+def test_formatear_alertas_lista_vacia():
+    assert _formatear_alertas([]) == ""
+
+
+def test_generate_output_incluye_alertas_en_excel_y_md(tmp_path):
+    brief = ClientBrief.from_json(BRIEF_VALIDO)
+    contenido = {
+        "posts": [
+            {
+                **CONTENIDO["posts"][0],
+                "estado": "REVISAR_MARCA",
+                "alertas_marca": [
+                    {"categoria": "legal", "severidad": "alta", "descripcion": "cifra no verificada"}
+                ],
+            }
+        ]
+    }
+
+    salidas = generate_output(contenido, brief, tmp_path)
+
+    contenido_md = Path(salidas["md"]).read_text(encoding="utf-8")
+    assert "[legal/alta] cifra no verificada" in contenido_md

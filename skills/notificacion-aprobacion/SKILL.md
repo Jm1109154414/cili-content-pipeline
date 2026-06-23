@@ -1,6 +1,6 @@
 ---
 name: notificacion-aprobacion
-description: Notifica al equipo que el contenido del mes está listo para revisar (checkpoint 2), por el medio configurado en el brief (WhatsApp/Excel/ambos), y registra cuando el equipo aprueba o pide cambios. Usar después de pipeline.output_formatter.generate_output().
+description: Notifica al equipo que el contenido del mes está listo para revisar (checkpoint 2), por el medio configurado en el brief (WhatsApp/Excel/ambos), y registra cuando el equipo aprueba o pide cambios. Usar después de pipeline.output_formatter.generate_output(). También dispara este skill si el operador pregunta "¿ya está listo el contenido de [cliente]?", "apruébame el mes de [cliente]" o responde directamente a una notificación previa con cambios o un visto bueno.
 ---
 
 # Notificación y aprobación del equipo
@@ -29,12 +29,14 @@ flujo (Paso 5 en `PLAN_MAESTRO.md`).
 ## Paso 1 — Armar el resumen
 
 Cuenta los posts por `estado` (vocabulario único en `PLAN_MAESTRO.md`):
-`GENERADO`, `REVISAR_MARCA`, `IMAGEN_PENDIENTE`, `PENDIENTE_MANUAL`. Construye
-un mensaje corto:
+`GENERADO`, `REVISAR_MARCA`, `IMAGEN_PENDIENTE`, `PENDIENTE_MANUAL`. Para los
+posts con `alertas_marca`, ordénalas por severidad (alta primero — cada
+alerta trae `categoria`/`severidad`/`descripcion`, ver
+`skills/chequeo-marca/SKILL.md`). Construye un mensaje corto:
 
 > ✅ Contenido de {empresa} — {mes} listo: 18/20 posts limpios.
 > ⚠️ 2 necesitan tu revisión antes de aprobar:
-> - Post 7 (REVISAR_MARCA): cifra no verificada
+> - 🔴 Post 7 (legal, alta): cifra no verificada
 > - Post 14 (IMAGEN_PENDIENTE): la imagen falló al generarse
 
 Si `chequeo-marca` dejó un reporte de alertas (su "Reporte adicional"), úsalo

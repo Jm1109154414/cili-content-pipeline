@@ -1,6 +1,6 @@
 ---
 name: estrategia-copy
-description: Genera la estrategia de contenido del mes y el copy completo de cada post para un cliente de marketing orgánico (CiLi y futuros clientes), a partir de su brief validado. Usar cuando el brief de un cliente ya fue confirmado (checkpoint 1) y hay que producir el calendario del mes.
+description: Genera la estrategia de contenido del mes y el copy completo de cada post para un cliente de marketing orgánico (CiLi y futuros clientes), a partir de su brief validado. Usar cuando el brief de un cliente ya fue confirmado (checkpoint 1) y hay que producir el calendario del mes. Dispara este skill también si el operador pide "generar el contenido de [cliente] de este mes", "armar el calendario", "regenerar el post {post_id}" (un solo post puntual) o "necesito los copies de [cliente]" — no solo en el flujo automático completo.
 ---
 
 # Estrategia + Copy del mes

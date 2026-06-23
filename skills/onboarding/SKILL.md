@@ -1,6 +1,6 @@
 ---
 name: onboarding
-description: Conversa con un cliente nuevo o recurrente por WebChat para producir su brief de marketing (estructura ClientBrief), pre-llenando lo que pueda leyendo su web/redes y preguntando solo lo que falte. Usar al inicio de cualquier ciclo mensual, antes de estrategia-copy.
+description: Conversa con un cliente nuevo o recurrente por WebChat para producir su brief de marketing (estructura ClientBrief), pre-llenando lo que pueda leyendo su web/redes y preguntando solo lo que falte. Usar al inicio de cualquier ciclo mensual, antes de estrategia-copy. Dispara este skill siempre que el operador diga cosas como "dar de alta un cliente nuevo", "vamos a hacer el onboarding de [cliente]", "necesito el brief de [cliente] para este mes", "actualizar la info de [cliente]" o "platica con [cliente] para sacar su brief" — incluso si no mencionan la palabra "brief" u "onboarding" explícitamente.
 ---
 
 # Onboarding conversacional

@@ -33,25 +33,39 @@ posición le pegaría la imagen equivocada al post equivocado).
 
 ## Qué revisar, post por post
 
-1. **Temas prohibidos:** ¿el post toca algo de `temas_a_evitar`? (ej. para
-   CiLi: política, temas sociales controversiales, críticas directas a
-   competidores por nombre)
-2. **Qué evitar:** ¿el post cae en algo de `evitar`? (ej. para CiLi: promesas
-   vacías sin dato que las respalde, lenguaje técnico sin explicar, frases
-   motivacionales genéricas tipo "frase del día")
-3. **Cifras y datos citados:** si el copy menciona un número o dato concreto
-   (ej. "+2,000 certificados", "$121 MDD en ahorros"), debe **existir
-   literalmente** en `credenciales`, `testimonios` o `casos_exito` del brief.
-   Si el post inventó o alteró una cifra que no está en el brief, márcalo.
-4. **Tono:** ¿el post suena consistente con `tono` y `tres_palabras_marca`?
-   (ej. CiLi: profesional pero accesible, basado en datos — no debe sonar
-   como anuncio genérico de curso barato)
-5. **Idea visual:** ¿la `idea_visual`/prompt de imagen describe algo que el
-   brief pide evitar? (ej. foto de stock de personas sonriendo en oficina)
+Cada hallazgo tiene una **categoría** y una **severidad** — esto le ayuda al
+equipo a priorizar qué revisar primero en vez de tratar todo igual (ver
+"Salida esperada" abajo para el formato exacto).
 
-6. **Nombres de competidores:** ¿el post menciona por nombre a alguien de
-   `competidores`? Esto se prohíbe **siempre, para cualquier cliente**, no
-   solo para CiLi — márcalo si pasa.
+**Categoría `marca`** (consistencia con la identidad del cliente):
+1. **Temas prohibidos** (severidad alta): ¿el post toca algo de
+   `temas_a_evitar`? (ej. para CiLi: política, temas sociales controversiales,
+   críticas directas a competidores por nombre)
+2. **Qué evitar** (severidad media-alta, según qué tan grave): ¿el post cae en
+   algo de `evitar`? (ej. para CiLi: lenguaje técnico sin explicar, frases
+   motivacionales genéricas tipo "frase del día")
+3. **Tono** (severidad baja-media): ¿el post suena consistente con `tono` y
+   `tres_palabras_marca`? (ej. CiLi: profesional pero accesible, basado en
+   datos — no debe sonar como anuncio genérico de curso barato)
+4. **Idea visual** (severidad media): ¿la `idea_visual`/prompt de imagen
+   describe algo que el brief pide evitar? (ej. foto de stock de personas
+   sonriendo en oficina)
+5. **Nombres de competidores** (severidad alta): ¿el post menciona por nombre
+   a alguien de `competidores`? Esto se prohíbe **siempre, para cualquier
+   cliente**, no solo para CiLi.
+
+**Categoría `legal`** (riesgo de credibilidad o reclamo, no solo estilo):
+6. **Cifras y datos citados** (severidad alta): si el copy menciona un número
+   o dato concreto (ej. "+2,000 certificados", "$121 MDD en ahorros"), debe
+   **existir literalmente** en `credenciales`, `testimonios` o `casos_exito`
+   del brief. Una cifra inventada o alterada no es un detalle de estilo —
+   es una afirmación que el cliente no puede respaldar si alguien la cuestiona.
+7. **Superlativos sin respaldo** (severidad media): palabras como "el mejor",
+   "el más rápido", "el único" sin un dato o comparación que lo sostenga.
+   Igual que el punto 6: no es solo tono, es una afirmación verificable.
+8. **Testimonios sin atribución clara**: si el post cita un testimonio,
+   confirma que venga literal de `testimonios` del brief (con nombre/cargo),
+   no una paráfrasis inventada que suene a cita real.
 
 ## Qué NO haces
 
@@ -102,8 +116,16 @@ directamente este JSON.
       "ruta_imagen": "output/cili/julio_2026/imagenes/post_02_instagram_2026-07-04/imagen.png",
       "estado": "REVISAR_MARCA",
       "alertas_marca": [
-        "Cifra '+5,000 certificados' no coincide con credenciales del brief (dice +2,000)",
-        "El post menciona por nombre a 'CI Academy', que está en competidores"
+        {
+          "categoria": "legal",
+          "severidad": "alta",
+          "descripcion": "Cifra '+5,000 certificados' no coincide con credenciales del brief (dice +2,000)"
+        },
+        {
+          "categoria": "marca",
+          "severidad": "alta",
+          "descripcion": "El post menciona por nombre a 'CI Academy', que está en competidores"
+        }
       ]
     },
     {
@@ -123,9 +145,11 @@ post con alerta: sigue revisando todos, entrega el reporte completo.
 
 ## Reporte adicional (para la notificación al equipo)
 
-Junto con el JSON, genera un resumen de una línea por alerta encontrada, para
-incluir en la notificación de aprobación (WhatsApp/Excel — ver
-`PLAN_MAESTRO.md`, Paso 5). Ejemplo:
+Junto con el JSON, genera un resumen de una línea por alerta encontrada, **ordenado
+por severidad (alta primero)** — así el equipo prioriza qué revisar primero en
+vez de leer la lista en orden aleatorio. Incluye esto en la notificación de
+aprobación (WhatsApp/Excel — ver `PLAN_MAESTRO.md`, Paso 5). Ejemplo:
 
-> ⚠️ 2 de 20 posts necesitan revisión de marca antes de aprobar:
-> Post 7 (cifra no verificada), Post 14 (tema sensible).
+> ⚠️ 2 de 20 posts necesitan revisión antes de aprobar:
+> - 🔴 Post 7 (legal, alta): cifra no coincide con el brief
+> - 🟡 Post 14 (marca, media): tono más casual de lo habitual

@@ -53,7 +53,9 @@ sección a lenguaje natural:
 - Sección D (marca) → "¿Cómo quieres que suene tu marca? ¿Hay algo que nunca
   deberíamos publicar?"
 - Sección E (credibilidad) → "¿Qué números o testimonios tienes para
-  respaldar lo que ofreces?"
+  respaldar lo que ofreces? ¿Y quiénes consideras tu competencia directa?"
+  (la respuesta de competencia es importante: el chequeo de marca usa esa
+  lista para nunca mencionarlos por nombre en el contenido)
 - Sección F (del mes) → "¿Qué tema quieres tocar este mes? ¿Hay algo especial
   que celebrar o lanzar?"
 
@@ -69,6 +71,12 @@ depende de que estos campos tengan sustancia real, no relleno.
 
 Ejemplo de repregunta: *"Entiendo que dan buen servicio — ¿me compartes un
 ejemplo concreto, un testimonio real o un dato que lo demuestre?"*
+
+**Campos que requieren mínimo 3 elementos concretos (no aceptes menos):**
+`dolores`, `deseos`, `objeciones`. **Campos que requieren mínimo 1, idealmente
+2+:** `testimonios`, `colores_hex`, `tres_palabras_marca`. Si el cliente da
+menos de lo mínimo, sigue insistiendo en esos campos específicos antes de
+avanzar — `pipeline/brief_schema.py` rechaza el brief si quedan vacíos.
 
 ## Paso 4 — Validar contra el schema
 

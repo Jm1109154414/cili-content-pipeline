@@ -42,41 +42,69 @@ checkpoint 2 (aprobación humana).
 5. **Idea visual:** ¿la `idea_visual`/prompt de imagen describe algo que el
    brief pide evitar? (ej. foto de stock de personas sonriendo en oficina)
 
+6. **Nombres de competidores:** ¿el post menciona por nombre a alguien de
+   `competidores`? Esto se prohíbe **siempre, para cualquier cliente**, no
+   solo para CiLi — márcalo si pasa.
+
 ## Qué NO haces
 
 No reescribes el copy ni regeneras nada. Solo marcas. La corrección, si hace
 falta, la hace el equipo en el checkpoint de aprobación o se vuelve a correr
 ese post puntual por `estrategia-copy`/`imagenes`.
 
+## Regla de precedencia de `estado` (no negociable)
+
+Este skill consolida el `estado` final de cada post — ver el vocabulario único
+en `PLAN_MAESTRO.md`. **Antes de escribir nada, revisa el `estado` que ya
+trae el post** (de `estrategia-copy`) y el de su imagen correspondiente (de
+`imagenes`, recibido en la entrada):
+
+- Si el post ya tiene `"estado": "PENDIENTE_MANUAL"` (el texto falló) o su
+  imagen tiene `"estado": "IMAGEN_PENDIENTE"` (la imagen falló): **respeta
+  ese estado, no lo sobrescribas.** Solo agrega `alertas_marca` si encontraste
+  algo adicional, pero el `estado` se queda como venía.
+- Solo si el post no trae ya un estado de falla, escribe `GENERADO` (si no
+  encontraste problemas) o `REVISAR_MARCA` (si encontraste alguno).
+
+Esto evita que un chequeo de marca "limpio" tape silenciosamente que la
+imagen de ese post nunca se generó.
+
 ## Salida esperada (JSON)
 
 Devuelve la misma lista de posts de `estrategia-copy`, **sin alterar su
-contenido**, agregando dos campos por post:
+contenido de texto**, con el `estado` final ya consolidado (ver regla de
+precedencia arriba) y agregando `alertas_marca`:
 
 ```json
 {
   "posts": [
     {
       "...": "todos los campos originales del post, sin tocar",
-      "estado": "APROBADO_AUTO",
+      "estado": "GENERADO",
       "alertas_marca": []
     },
     {
-      "...": "post con problema detectado",
+      "...": "post con problema detectado, pero su imagen sí se generó bien",
       "estado": "REVISAR_MARCA",
       "alertas_marca": [
         "Cifra '+5,000 certificados' no coincide con credenciales del brief (dice +2,000)",
-        "El post toca 'críticas a competidores por nombre', listado en temas_a_evitar"
+        "El post menciona por nombre a 'CI Academy', que está en competidores"
       ]
+    },
+    {
+      "...": "post cuya imagen falló — el estado de imagenes se respeta, no se pisa",
+      "estado": "IMAGEN_PENDIENTE",
+      "alertas_marca": []
     }
   ]
 }
 ```
 
 `estado` se respeta tal cual por `pipeline/output_formatter.py` (columna
-"Estado" del Excel) — los posts con `REVISAR_MARCA` deben saltar a la vista
-del equipo antes de aprobar el mes completo. No detengas el resto del mes por
-un post con alerta: sigue revisando todos, entrega el reporte completo.
+"Estado" del Excel) — los posts con `REVISAR_MARCA` o `IMAGEN_PENDIENTE`
+deben saltar a la vista del equipo antes de aprobar el mes completo. No
+detengas el resto del mes por un post con alerta: sigue revisando todos,
+entrega el reporte completo.
 
 ## Reporte adicional (para la notificación al equipo)
 

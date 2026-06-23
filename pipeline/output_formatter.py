@@ -13,8 +13,12 @@ COLUMNAS = [
 
 
 def _filas(contenido: dict, image_results: dict) -> list[dict]:
-    """contenido viene del skill estrategia-copy: {"posts": [{fecha, plataforma,
-    tipo, objetivo, gancho, copy_completo, hashtags, cta, ...}]}."""
+    """contenido viene de chequeo-marca (que ya consolidó el "estado" final
+    de estrategia-copy + imagenes, ver vocabulario único en PLAN_MAESTRO.md):
+    {"posts": [{fecha, plataforma, tipo, objetivo, gancho, copy_completo,
+    hashtags, cta, estado, ...}]}. El fallback a imagen_post.get("estado")
+    solo aplica si "contenido" viniera directo de estrategia-copy sin pasar
+    por chequeo-marca."""
     posts_contenido = contenido.get("posts", [])
     imagenes_lista = image_results.get("posts", [])
 

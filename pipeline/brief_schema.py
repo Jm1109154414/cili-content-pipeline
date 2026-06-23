@@ -57,7 +57,7 @@ class ClientBrief(BaseModel):
 
     # SECCIÓN E — Contenido y credibilidad
     credenciales: Optional[str] = None
-    testimonios: list[str] = Field(default_factory=list)
+    testimonios: list[str] = Field(min_length=1)
     casos_exito: Optional[str] = None
     temas_que_funcionan: list[str] = Field(default_factory=list)
     temas_a_evitar: list[str] = Field(default_factory=list)

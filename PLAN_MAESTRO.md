@@ -126,6 +126,31 @@ Son dos cosas distintas (entendimiento vs. calidad), por eso se quedan ambas.
 
 ---
 
+## VOCABULARIO ÚNICO DE ESTADOS (fuente de verdad — todos los skills deben usar esto)
+
+Cada post tiene un único campo `estado`, escrito en distintos pasos del flujo.
+Para evitar que un skill pise silenciosamente el resultado de otro, el campo
+**se respeta por prioridad**: si un post ya tiene un estado de falla, ningún
+paso posterior puede sobrescribirlo con un estado "limpio".
+
+| Estado | Quién lo escribe | Significado | Prioridad |
+|---|---|---|---|
+| `PENDIENTE_MANUAL` | `estrategia-copy` | El texto del post falló al generarse | 1 (máxima — nunca se pisa) |
+| `IMAGEN_PENDIENTE` | `imagenes` | La imagen del post falló al generarse | 1 (máxima — nunca se pisa) |
+| `REVISAR_MARCA` | `chequeo-marca` | El chequeo de marca detectó un problema (cifra no verificada, tema prohibido, etc.) | 2 |
+| `GENERADO` | `chequeo-marca` (al cerrar el ciclo automático) | Todo el contenido pasó limpio, listo para que el equipo lo revise | 3 (default si nada falló) |
+| `APROBADO` | Skill de notificación/aprobación (pendiente de construir) | El equipo dio el visto bueno (checkpoint 2) | 4 |
+| `PUBLICADO` | Marcado manualmente por el equipo | Ya está en redes | 5 |
+
+**Regla para `chequeo-marca` (el que consolida el estado final por post):**
+antes de escribir `estado`, revisa si el post ya trae `PENDIENTE_MANUAL` (de
+`estrategia-copy`) o `IMAGEN_PENDIENTE` (de `imagenes`) — si trae cualquiera
+de los dos, **respétalo y no lo toques**, solo agrega las `alertas_marca` que
+encuentres. Únicamente escribe `GENERADO` o `REVISAR_MARCA` cuando el post no
+tenía ya un estado de falla previo.
+
+---
+
 ## QUÉ SE SIMPLIFICÓ (recorte de redundancias)
 
 Gracias a que OpenClaw absorbe trabajo, pasamos de **8 archivos Python** a

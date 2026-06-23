@@ -19,9 +19,12 @@ chequeo de marca y de armar el entregable final (`output_formatter.py`).
 ## Entrada
 
 - La salida de `estrategia-copy`: lista de posts, cada uno con al menos
-  `fecha`, `plataforma`, `tipo`, `idea_visual` y `gancho`/`copy_completo`.
-- El brief del cliente: necesitas `colores_hex`, `estilo_visual`, `evitar` y
-  `tres_palabras_marca` para que la imagen respete la identidad de marca.
+  `fecha`, `plataforma`, `tipo`, `idea_visual`, `gancho`/`copy_completo` y
+  `estado` (respeta si ya viene en `PENDIENTE_MANUAL` — ver más abajo).
+- El brief del cliente: `colores_hex`, `estilo_visual`, `evitar` y
+  `tres_palabras_marca` para que la imagen respete la identidad de marca, más
+  `credenciales`/`testimonios`/`casos_exito` cuando el post necesite mostrar
+  una cifra real dentro de la imagen (Paso 1).
 
 ## Paso 1 — Construir el prompt de imagen (por post)
 

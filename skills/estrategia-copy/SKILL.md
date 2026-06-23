@@ -18,10 +18,13 @@ referencia adicional descrito abajo.
 ## Entrada
 
 - El brief completo del cliente (JSON con las secciones A-F).
-- Si el cliente es CiLi: lee también `briefs/cili_pilares_completo.md` (avatar
-  real, dolores/deseos/certezas, framework de códigos) y
-  `prompts/reference_banco_temas_cili.md` (banco de temas por certificación +
-  5 ejemplos ya redactados de tono).
+- **Busca material de referencia propio del cliente** antes de generar: si
+  existen `briefs/{cliente}_pilares_completo.md` y/o
+  `prompts/reference_banco_temas_{cliente}.md`, úsalos igual que se describe
+  abajo para CiLi. CiLi es el primer cliente con este material
+  (`briefs/cili_pilares_completo.md` y `prompts/reference_banco_temas_cili.md`),
+  pero la regla aplica a cualquier cliente que tenga su propio archivo de
+  referencia, no es exclusiva de CiLi.
 - Si existen meses anteriores del mismo cliente en `output/{cliente}/`, revísalos
   para **no repetir** temas ya publicados.
 
@@ -34,17 +37,32 @@ referencia adicional descrito abajo.
    - `plataforma` (una de: Instagram, LinkedIn, Facebook, TikTok)
    - `tipo`: `imagen_sola` | `carrusel` | `reel` | `historia` | `video_corto`
    - `objetivo`: `awareness` | `educacion` | `credibilidad` | `conversion` | `comunidad`
-3. Mezcla de objetivos en el mes: ~40% educación, ~30% conversión, ~20%
-   credibilidad, ~10% comunidad — salvo que el brief pida otro reparto
-   explícito (`objetivo_mes`, `descripcion_objetivo`).
+3. Mezcla base de objetivos en el mes: ~40% educación, ~30% conversión, ~20%
+   credibilidad, ~10% comunidad. **Ajusta este reparto según `objetivo_mes`
+   del brief** (son dos vocabularios distintos — `objetivo_mes` es la meta
+   del mes completo, `objetivo` es el tipo de cada post individual):
+
+   | `objetivo_mes` del brief | Cómo ajustar la mezcla de `objetivo` por post |
+   |---|---|
+   | `awareness` | Sube `awareness` a ~30%, baja `conversion` a ~15% |
+   | `leads` | Sube `conversion` a ~40% (con CTA hacia el lead magnet), mantén `credibilidad` en 20% |
+   | `ventas` | Sube `conversion` a ~45-50%, baja `educacion` a ~25-30% |
+   | `comunidad` | Sube `comunidad` a ~20-25%, baja `conversion` a ~20% |
+
+   Si el brief además da `descripcion_objetivo`, sigue esa instrucción
+   específica por encima de la tabla.
 4. El mismo tema puede adaptarse a 2-3 plataformas con ajustes de formato,
    no hace falta un tema distinto por cada post.
-5. **Si el cliente es CiLi:** elige los temas del banco en
-   `reference_banco_temas_cili.md` según el nivel de certificación que
-   indique `tema_semana_N` del brief (Yellow / Green Lean / Green Six Sigma /
-   Black Belt). No repitas un tema ya usado en un mes anterior de CiLi.
-6. **Para cualquier otro cliente:** los temas salen del propio brief
-   (`temas_que_funcionan`, `dolores`, `deseos`, `servicio_principal`).
+5. **Si el cliente tiene un banco de temas propio** (ver "Entrada" arriba):
+   elige los temas de ahí según el nivel/categoría que indique `tema_semana_N`
+   del brief. No repitas un tema ya usado en un mes anterior del mismo cliente.
+6. **Si el cliente no tiene banco de temas propio:** los temas salen del
+   propio brief (`temas_que_funcionan`, `dolores`, `deseos`, `servicio_principal`).
+7. **Usa `objeciones` del brief explícitamente** para los posts de objetivo
+   `credibilidad` o que cubran el código `C` (Certeza, si el cliente usa el
+   framework de códigos): cada objeción real del brief es una oportunidad de
+   post que la responde directamente (ej. objeción "es muy caro" → post de
+   certeza sobre el retorno de inversión).
 
 ## Reglas del copy (cómo escribir cada post)
 
@@ -107,6 +125,7 @@ resultados sin dato que los respalde. No uses lenguaje técnico sin explicarlo.
       "tipo": "carrusel",
       "objetivo": "educacion",
       "codigos_framework": ["PR", "I"],
+      "estado": "GENERADO",
       "gancho": "...",
       "cuerpo": "...",
       "cta": "...",
@@ -125,7 +144,9 @@ de generación de imágenes (usa `idea_visual`).
 
 ## Errores y reintentos
 
-Si la generación de un post falla o queda incompleta, no detengas el resto del
-mes: marca ese post con `"estado": "PENDIENTE_MANUAL"` en el JSON y continúa
-con los siguientes. El chequeo de marca (skill aparte) revisa el resultado
-completo después.
+Cada post debe incluir un campo `estado` (ver vocabulario único en
+`PLAN_MAESTRO.md`): por defecto `"estado": "GENERADO"`. Si la generación de un
+post falla o queda incompleta, no detengas el resto del mes: marca ese post
+con `"estado": "PENDIENTE_MANUAL"` y continúa con los siguientes. Los skills
+posteriores (`imagenes`, `chequeo-marca`) deben **respetar** `PENDIENTE_MANUAL`
+y no sobrescribirlo.

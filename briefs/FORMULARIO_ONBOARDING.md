@@ -88,6 +88,7 @@ Instrucciones: llena cada campo con texto normal. Cuando termines, pásalo a `br
 | Tema semana 2 | |
 | Tema semana 3 | |
 | Tema semana 4 | |
+| Medio de aprobación interna (lo decide el equipo que opera la cuenta, no se le pregunta al cliente final) | ☐ WhatsApp ☐ Excel ☐ ambos (default si no se especifica) |
 
 ---
 

@@ -10,8 +10,8 @@ primero.
 
 1. Descarga/clona este repo en la máquina donde corre tu OpenClaw.
 2. Copia (o enlaza) la carpeta `skills/` dentro del workspace de OpenClaw,
-   para que detecte los 4 skills (`onboarding`, `estrategia-copy`, `imagenes`,
-   `chequeo-marca`) en su `<available_skills>`.
+   para que detecte los 5 skills (`onboarding`, `estrategia-copy`, `imagenes`,
+   `chequeo-marca`, `notificacion-aprobacion`) en su `<available_skills>`.
 3. Configura tus API keys (Claude, OpenAI) **dentro de OpenClaw**
    (`~/.openclaw/openclaw.json`), no en este repo — este repo no las usa
    directamente (ver `.env.example`).
@@ -38,6 +38,7 @@ primero.
 | `skills/estrategia-copy/SKILL.md` | Genera estrategia + copy del mes a partir del brief |
 | `skills/imagenes/SKILL.md` | Genera la imagen de cada post (GPT Image 2) |
 | `skills/chequeo-marca/SKILL.md` | Revisa el contenido contra los estándares de marca antes de entregar |
+| `skills/notificacion-aprobacion/SKILL.md` | Notifica al equipo (WhatsApp/Excel/ambos) y registra la aprobación del mes (checkpoint 2) |
 | `briefs/FORMULARIO_ONBOARDING.md` | Guion de preguntas que usa `onboarding` |
 | `briefs/_template_brief.json` | Plantilla vacía del brief — válida para cualquier cliente |
 | `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto |
@@ -60,6 +61,9 @@ del motor** — bórrala completa (`rm -rf examples/`) y el resto del repo sigue
 funcionando igual para cualquier cliente nuevo. Se deja aquí para seguir
 probando el flujo con datos reales mientras se valida el sistema.
 
-## Lo que falta construir (ver `PLAN_MAESTRO.md`, sección FASES)
+## Estado
 
-Notificación/aprobación del equipo (checkpoint 2).
+Los 5 skills de la fase "AHORA" (`PLAN_MAESTRO.md`, sección FASES) ya están
+construidos: onboarding → estrategia-copy → imagenes → chequeo-marca →
+notificacion-aprobacion. Lo que sigue (video, cron, publicación automática)
+son fases futuras — ver `PLAN_MAESTRO.md`.

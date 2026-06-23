@@ -108,10 +108,11 @@ PASO 4 — ENTREGABLE (script Python)
   • imagenes/ (carpeta por post: imagen + copy)
         │
         ▼
-PASO 5 — APROBACIÓN (medio configurable)
-  • OpenClaw notifica que está listo
-  • Checkpoint 2: el equipo aprueba
-       (por WhatsApp respondiendo / en el Excel / ambos — configurable)
+PASO 5 — APROBACIÓN (skill construido: skills/notificacion-aprobacion/SKILL.md)
+  • Notifica según brief.medio_aprobacion (whatsapp/excel/ambos)
+  • Checkpoint 2: el equipo aprueba (responde en WhatsApp o marca el Excel)
+  • Posts en GENERADO → APROBADO; nunca pisa REVISAR_MARCA/IMAGEN_PENDIENTE
+    sin resolución explícita del equipo
   • Publicación MANUAL por ahora
 ```
 
@@ -141,7 +142,7 @@ paso posterior puede sobrescribirlo con un estado "limpio".
 | `IMAGEN_PENDIENTE` | `imagenes` | La imagen del post falló al generarse | 1 (máxima — nunca se pisa) |
 | `REVISAR_MARCA` | `chequeo-marca` | El chequeo de marca detectó un problema (cifra no verificada, tema prohibido, etc.) | 2 |
 | `GENERADO` | `chequeo-marca` (al cerrar el ciclo automático) | Todo el contenido pasó limpio, listo para que el equipo lo revise | 3 (default si nada falló) |
-| `APROBADO` | Skill de notificación/aprobación (pendiente de construir) | El equipo dio el visto bueno (checkpoint 2) | 4 |
+| `APROBADO` | `notificacion-aprobacion` | El equipo dio el visto bueno (checkpoint 2) | 4 |
 | `PUBLICADO` | Marcado manualmente por el equipo | Ya está en redes | 5 |
 
 **Regla para `chequeo-marca` (el que consolida el estado final por post):**
@@ -231,7 +232,8 @@ en el guión del skill conversacional.
 3. ✅ Imágenes — `skills/imagenes/SKILL.md` (GPT Image 2)
 4. ✅ Chequeo de marca — `skills/chequeo-marca/SKILL.md`
 5. ✅ Validación (brief_schema) + Excel (output_formatter) en código
-6. ❌ Notificación y aprobación por el medio configurable — pendiente
+6. ✅ Notificación y aprobación por el medio configurable —
+   `skills/notificacion-aprobacion/SKILL.md` (`brief.medio_aprobacion`)
 7. ✅ Memoria de meses anteriores (no repetir) — `pipeline/historial.py`,
    usado por `skills/estrategia-copy/SKILL.md`
 
@@ -259,4 +261,6 @@ en el guión del skill conversacional.
   Las llaves se configuran dentro de OpenClaw (`~/.openclaw/openclaw.json` en
   la máquina donde corre), que es quien invoca los skills. Falta hacer esa
   configuración en OpenClaw para poder probar el flujo de extremo a extremo.
-- **Medio de aprobación:** queda configurable por cliente (WhatsApp / Excel / ambos).
+- **Medio de aprobación:** ✅ configurable por cliente — campo `medio_aprobacion`
+  en el brief (`whatsapp` / `excel` / `ambos`, default `ambos`), usado por
+  `skills/notificacion-aprobacion/SKILL.md`.

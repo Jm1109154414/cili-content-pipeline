@@ -82,6 +82,24 @@ def test_template_vacio_es_rechazado():
     assert not es_valido
 
 
+def test_medio_aprobacion_default_es_ambos():
+    brief = ClientBrief.from_json(BRIEF_VALIDO)
+    assert brief.medio_aprobacion == "ambos"
+
+
+def test_medio_aprobacion_invalido_falla(tmp_path):
+    import json
+
+    data = json.loads(BRIEF_VALIDO.read_text(encoding="utf-8"))
+    data["medio_aprobacion"] = "telegram"
+    archivo = tmp_path / "brief_malo.json"
+    archivo.write_text(json.dumps(data), encoding="utf-8")
+
+    es_valido, mensaje = validate_and_report(archivo)
+    assert not es_valido
+    assert "medio_aprobacion inválido" in mensaje
+
+
 def test_testimonios_vacio_falla(tmp_path):
     import json
 

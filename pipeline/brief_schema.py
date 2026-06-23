@@ -13,6 +13,7 @@ NIVELES_CONCIENCIA_VALIDOS = {
     "compara_opciones",
 }
 OBJETIVOS_MES_VALIDOS = {"awareness", "leads", "ventas", "comunidad"}
+MEDIOS_APROBACION_VALIDOS = {"whatsapp", "excel", "ambos"}
 
 
 class RedesSociales(BaseModel):
@@ -74,6 +75,7 @@ class ClientBrief(BaseModel):
     tema_semana_2: Optional[str] = None
     tema_semana_3: Optional[str] = None
     tema_semana_4: Optional[str] = None
+    medio_aprobacion: str = "ambos"
 
     @field_validator("plataformas")
     @classmethod
@@ -107,6 +109,15 @@ class ClientBrief(BaseModel):
         if v not in OBJETIVOS_MES_VALIDOS:
             raise ValueError(
                 f"objetivo_mes inválido: '{v}'. Válidos: {OBJETIVOS_MES_VALIDOS}"
+            )
+        return v
+
+    @field_validator("medio_aprobacion")
+    @classmethod
+    def validar_medio_aprobacion(cls, v: str) -> str:
+        if v not in MEDIOS_APROBACION_VALIDOS:
+            raise ValueError(
+                f"medio_aprobacion inválido: '{v}'. Válidos: {MEDIOS_APROBACION_VALIDOS}"
             )
         return v
 

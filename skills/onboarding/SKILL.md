@@ -59,6 +59,11 @@ sección a lenguaje natural:
 - Sección F (del mes) → "¿Qué tema quieres tocar este mes? ¿Hay algo especial
   que celebrar o lanzar?"
 
+**No le preguntes al cliente** por `medio_aprobacion` — es una preferencia
+interna de cómo el equipo que opera la cuenta revisa el contenido (WhatsApp,
+Excel, o ambos), no algo que decida el cliente final. Si el brief no la trae,
+queda en `"ambos"` por default (ver `pipeline/brief_schema.py`).
+
 ## Paso 3 — Insistir en respuestas vagas (regla dura, no opcional)
 
 Si una respuesta es genérica ("buen servicio", "clientes contentos",

@@ -17,12 +17,19 @@ checkpoint 2 (aprobación humana).
 
 ## Entrada
 
-- La salida de `estrategia-copy`: todos los posts del mes (gancho, cuerpo, cta,
-  copy_completo, idea_visual, etc.)
-- La salida de `imagenes`: estado de cada imagen
+- La salida de `estrategia-copy`: todos los posts del mes (`post_id`, gancho,
+  cuerpo, cta, copy_completo, idea_visual, etc.)
+- La salida de `imagenes`: `ruta_imagen`/`ruta_copy`/`estado` por `post_id`
 - El brief del cliente completo, en particular: `evitar`, `temas_a_evitar`,
   `tono`, `tres_palabras_marca`, `credenciales`/`testimonios` (para verificar
   que las cifras citadas existan en el brief, no inventadas)
+
+## Paso 0 — Emparejar por `post_id`, nunca por posición
+
+Antes de revisar nada, une cada post de `estrategia-copy` con su contraparte
+de `imagenes` **buscando el mismo `post_id`** (no asumas que están en el mismo
+orden en ambas listas — si un post se saltó o se reordenó, emparejar por
+posición le pegaría la imagen equivocada al post equivocado).
 
 ## Qué revisar, post por post
 
@@ -69,22 +76,30 @@ trae el post** (de `estrategia-copy`) y el de su imagen correspondiente (de
 Esto evita que un chequeo de marca "limpio" tape silenciosamente que la
 imagen de ese post nunca se generó.
 
-## Salida esperada (JSON)
+## Salida esperada (JSON) — este es el JSON FINAL, único, que recibe `output_formatter.py`
 
-Devuelve la misma lista de posts de `estrategia-copy`, **sin alterar su
-contenido de texto**, con el `estado` final ya consolidado (ver regla de
-precedencia arriba) y agregando `alertas_marca`:
+Este skill es el que **consolida todo en una sola lista**: toma cada post de
+`estrategia-copy`, le agrega `ruta_imagen`/`ruta_copy` de su contraparte en
+`imagenes` (emparejado por `post_id`, Paso 0), resuelve el `estado` final
+(regla de precedencia arriba) y agrega `alertas_marca`. Después de este paso
+**no hace falta ninguna otra lista** — `pipeline/output_formatter.py` recibe
+directamente este JSON.
 
 ```json
 {
   "posts": [
     {
-      "...": "todos los campos originales del post, sin tocar",
+      "post_id": "post_01",
+      "...": "todos los campos originales del post de estrategia-copy, sin alterar el texto",
+      "ruta_imagen": "output/cili/julio_2026/imagenes/post_01_linkedin_2026-07-03/imagen.png",
+      "ruta_copy": "output/cili/julio_2026/imagenes/post_01_linkedin_2026-07-03/copy.txt",
       "estado": "GENERADO",
       "alertas_marca": []
     },
     {
+      "post_id": "post_02",
       "...": "post con problema detectado, pero su imagen sí se generó bien",
+      "ruta_imagen": "output/cili/julio_2026/imagenes/post_02_instagram_2026-07-04/imagen.png",
       "estado": "REVISAR_MARCA",
       "alertas_marca": [
         "Cifra '+5,000 certificados' no coincide con credenciales del brief (dice +2,000)",
@@ -92,7 +107,9 @@ precedencia arriba) y agregando `alertas_marca`:
       ]
     },
     {
+      "post_id": "post_03",
       "...": "post cuya imagen falló — el estado de imagenes se respeta, no se pisa",
+      "ruta_imagen": "",
       "estado": "IMAGEN_PENDIENTE",
       "alertas_marca": []
     }
@@ -100,11 +117,9 @@ precedencia arriba) y agregando `alertas_marca`:
 }
 ```
 
-`estado` se respeta tal cual por `pipeline/output_formatter.py` (columna
-"Estado" del Excel) — los posts con `REVISAR_MARCA` o `IMAGEN_PENDIENTE`
-deben saltar a la vista del equipo antes de aprobar el mes completo. No
-detengas el resto del mes por un post con alerta: sigue revisando todos,
-entrega el reporte completo.
+Los posts con `REVISAR_MARCA` o `IMAGEN_PENDIENTE` deben saltar a la vista del
+equipo antes de aprobar el mes completo. No detengas el resto del mes por un
+post con alerta: sigue revisando todos, entrega el reporte completo.
 
 ## Reporte adicional (para la notificación al equipo)
 

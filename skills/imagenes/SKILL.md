@@ -19,12 +19,20 @@ chequeo de marca y de armar el entregable final (`output_formatter.py`).
 ## Entrada
 
 - La salida de `estrategia-copy`: lista de posts, cada uno con al menos
-  `fecha`, `plataforma`, `tipo`, `idea_visual`, `gancho`/`copy_completo` y
-  `estado` (respeta si ya viene en `PENDIENTE_MANUAL` — ver más abajo).
+  `post_id`, `fecha`, `plataforma`, `tipo`, `idea_visual`, `gancho`/`copy_completo`
+  y `estado`.
 - El brief del cliente: `colores_hex`, `estilo_visual`, `evitar` y
   `tres_palabras_marca` para que la imagen respete la identidad de marca, más
   `credenciales`/`testimonios`/`casos_exito` cuando el post necesite mostrar
   una cifra real dentro de la imagen (Paso 1).
+
+## Antes de generar — respeta el `estado` previo
+
+Si un post ya viene con `"estado": "PENDIENTE_MANUAL"` (el texto falló en
+`estrategia-copy`), **no generes su imagen** — no tiene sentido gastar en una
+imagen para un post cuyo copy no existe todavía. Pasa ese post directo a la
+salida con el mismo `estado: "PENDIENTE_MANUAL"` y sin `ruta_imagen`, y sigue
+con el resto.
 
 ## Paso 1 — Construir el prompt de imagen (por post)
 
@@ -68,9 +76,11 @@ Usa la tool nativa de imagen de OpenClaw apuntando a GPT Image 2, calidad
 "medium" (~$0.05/imagen — ver `COSTOS.md`). Si GPT Image 2 no está disponible
 o falla, plan B en este orden: Ideogram 4.0 → Imagen 4 (Google).
 
-Guarda cada imagen en `output/{cliente}/{mes}/imagenes/post_{NN}_{plataforma}_{fecha}/imagen.png`,
-y junto a ella un `copy.txt` con el `copy_completo` de ese post (para que el
-equipo revise imagen+texto juntos).
+Guarda cada imagen en `output/{cliente}/{mes}/imagenes/{post_id}_{plataforma}_{fecha}/imagen.png`
+(usa el `{cliente}`/`{mes}` slug de "Convención de nombres" en `PLAN_MAESTRO.md`
+y el `post_id` que trajo el post, no inventes uno nuevo), y junto a ella un
+`copy.txt` con el `copy_completo` de ese post (para que el equipo revise
+imagen+texto juntos).
 
 ## Manejo de errores
 
@@ -80,7 +90,7 @@ Si la generación de una imagen falla:
    el gancho del post como texto) y marca ese post como `"estado": "IMAGEN_PENDIENTE"`.
 3. Continúa con el siguiente post — nunca detengas el lote completo por una imagen.
 4. Registra el error en `output/{cliente}/{mes}/errores.log`
-   (`timestamp | IMAGEN_ERROR | post_NN | detalle`).
+   (`timestamp | IMAGEN_ERROR | post_id | detalle`).
 
 ## Salida esperada (JSON)
 
@@ -88,14 +98,15 @@ Si la generación de una imagen falla:
 {
   "posts": [
     {
-      "post": "post_01_instagram_2026-07-03",
-      "ruta_imagen": "output/cili/julio_2026/imagenes/post_01_instagram_2026-07-03/imagen.png",
-      "ruta_copy": "output/cili/julio_2026/imagenes/post_01_instagram_2026-07-03/copy.txt",
+      "post_id": "post_01",
+      "ruta_imagen": "output/cili/julio_2026/imagenes/post_01_linkedin_2026-07-03/imagen.png",
+      "ruta_copy": "output/cili/julio_2026/imagenes/post_01_linkedin_2026-07-03/copy.txt",
       "estado": "GENERADO"
     }
   ]
 }
 ```
 
-Este JSON, en el mismo orden que los posts de `estrategia-copy`, alimenta
-directo `pipeline/output_formatter.py` (columnas "Ruta imagen" y "Estado").
+Esta salida la consume `chequeo-marca`, que la empareja con los posts de
+`estrategia-copy` **por `post_id`** (no por posición) para producir el
+JSON final que recibe `pipeline/output_formatter.py`.

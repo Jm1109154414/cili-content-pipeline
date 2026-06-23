@@ -151,6 +151,33 @@ tenía ya un estado de falla previo.
 
 ---
 
+## CONVENCIÓN DE NOMBRES (fuente de verdad — todos los skills deben usar esto)
+
+Varios skills construyen rutas de archivo (`briefs/{cliente}_pilares_completo.md`,
+`output/{cliente}/{mes}/...`). Para que todos generen la misma ruta para el
+mismo cliente, el slug se calcula siempre así:
+
+- **`{cliente}`:** primera palabra de `empresa` (del brief), en minúsculas,
+  sin acentos ni símbolos. Ej: `"CiLi — Continuous Improvement..."` → `cili`.
+  `"Joyería Esperanza S.A."` → `joyeria`.
+- **`{mes}`:** el campo `mes` del brief (ej. `"Julio 2026"`), en minúsculas,
+  sin acentos, espacio reemplazado por `_`. Ej: `"Julio 2026"` → `julio_2026`.
+
+Con esto: el brief de CiLi de julio 2026 vive en `briefs/cili_julio_2026.json`,
+su material de referencia en `briefs/cili_pilares_completo.md` (sin mes — es
+información que no cambia mes a mes) y `prompts/reference_banco_temas_cili.md`,
+y su output del mes en `output/cili/julio_2026/`.
+
+## IDENTIFICADOR DE POST (`post_id`) — para no emparejar por posición
+
+`estrategia-copy` asigna a cada post un `post_id` secuencial (`post_01`,
+`post_02`, ...). **Todos los skills posteriores (`imagenes`, `chequeo-marca`)
+deben usar ese mismo `post_id` para referirse al post**, nunca la posición en
+la lista — si algún paso reordena o salta un post, emparejar por índice
+asignaría el estado o la imagen al post equivocado.
+
+---
+
 ## QUÉ SE SIMPLIFICÓ (recorte de redundancias)
 
 Gracias a que OpenClaw absorbe trabajo, pasamos de **8 archivos Python** a
@@ -198,9 +225,11 @@ en el guión del skill conversacional.
 
 ## PENDIENTES DE NEGOCIO (para la junta)
 
-- **💰 Costo por cliente al mes:** generar un mes completo (20+ posts: texto +
-  imágenes + quizá video) gasta dinero real en APIs. Hay que calcular el costo
-  unitario para poder ponerle precio al servicio. → Pendiente de estimar.
-- **API keys:** falta cargar ANTHROPIC_API_KEY y OPENAI_API_KEY para probar de
-  extremo a extremo.
+- **💰 Costo por cliente al mes:** ✅ ya estimado en `COSTOS.md` (~$36 MXN/mes
+  texto+imagen; ~$150-195 MXN/mes extra si se agrega video).
+- **API keys:** las llaves de Claude y OpenAI **no van en este repo** — este
+  repo ya no ejecuta llamadas a esas APIs directamente (ver "QUÉ SE SIMPLIFICÓ").
+  Las llaves se configuran dentro de OpenClaw (`~/.openclaw/openclaw.json` en
+  la máquina donde corre), que es quien invoca los skills. Falta hacer esa
+  configuración en OpenClaw para poder probar el flujo de extremo a extremo.
 - **Medio de aprobación:** queda configurable por cliente (WhatsApp / Excel / ambos).

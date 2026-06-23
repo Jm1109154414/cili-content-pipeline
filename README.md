@@ -17,14 +17,17 @@ están en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo primero.
 | `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto (se queda en código) |
 | `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final (se queda en código) |
 | `skills/estrategia-copy/SKILL.md` | ✅ **Skill construido** — genera estrategia + copy del mes en un solo paso, usando el framework propio de CiLi |
-| `skills/imagenes/SKILL.md` | ✅ **Skill construido** — genera la imagen de cada post vía Ideogram 3.0, alineada a marca |
+| `skills/imagenes/SKILL.md` | ✅ **Skill construido** — genera la imagen de cada post vía **GPT Image 2** (OpenAI), alineada a marca |
 | `skills/chequeo-marca/SKILL.md` | ✅ **Skill construido** — revisa el contenido del mes contra "evitar"/"temas_a_evitar" del brief antes de entregar |
 | `skills/onboarding/SKILL.md` | ✅ **Skill construido** — platica con el cliente, pre-llena leyendo su web/redes, produce el brief él mismo |
 
 > **Nota:** los generadores de estrategia, copy e imagen (que antes eran scripts
 > Python sueltos) se retiraron de este repo. Según `PLAN_MAESTRO.md`, esa lógica
 > se construye como **skills de OpenClaw** (instrucciones en `SKILL.md`, no CLI
-> manual). Ambos ya están construidos (`skills/estrategia-copy/`, `skills/imagenes/`).
+> manual). Los 4 skills del flujo "AHORA" ya están construidos en `/skills`
+> (onboarding, estrategia-copy, imagenes, chequeo-marca). Faltan los de
+> notificación/aprobación del equipo y memoria de meses anteriores — ver
+> `PLAN_MAESTRO.md` sección FASES.
 
 ## Setup (para lo que sí es código)
 

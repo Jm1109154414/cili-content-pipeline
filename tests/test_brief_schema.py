@@ -78,3 +78,16 @@ def test_template_vacio_es_rechazado():
     template = Path(__file__).parent.parent / "briefs" / "_template_brief.json"
     es_valido, _ = validate_and_report(template)
     assert not es_valido
+
+
+def test_testimonios_vacio_falla(tmp_path):
+    import json
+
+    data = json.loads(BRIEF_VALIDO.read_text(encoding="utf-8"))
+    data["testimonios"] = []
+    archivo = tmp_path / "brief_malo.json"
+    archivo.write_text(json.dumps(data), encoding="utf-8")
+
+    es_valido, mensaje = validate_and_report(archivo)
+    assert not es_valido
+    assert "testimonios" in mensaje

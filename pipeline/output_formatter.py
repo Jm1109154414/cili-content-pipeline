@@ -12,19 +12,16 @@ COLUMNAS = [
 ]
 
 
-def _filas(contenido: dict, image_results: dict) -> list[dict]:
-    """contenido viene de chequeo-marca (que ya consolidó el "estado" final
-    de estrategia-copy + imagenes, ver vocabulario único en PLAN_MAESTRO.md):
-    {"posts": [{fecha, plataforma, tipo, objetivo, gancho, copy_completo,
-    hashtags, cta, estado, ...}]}. El fallback a imagen_post.get("estado")
-    solo aplica si "contenido" viniera directo de estrategia-copy sin pasar
-    por chequeo-marca."""
+def _filas(contenido: dict) -> list[dict]:
+    """contenido viene de chequeo-marca: ya consolidó por post_id el estado
+    final y la ruta_imagen de estrategia-copy + imagenes (ver vocabulario
+    único de estados e identificador de post en PLAN_MAESTRO.md).
+    {"posts": [{post_id, fecha, plataforma, tipo, objetivo, gancho,
+    copy_completo, hashtags, cta, ruta_imagen, estado, ...}]}."""
     posts_contenido = contenido.get("posts", [])
-    imagenes_lista = image_results.get("posts", [])
 
     filas = []
     for i, post in enumerate(posts_contenido):
-        imagen_post = imagenes_lista[i] if i < len(imagenes_lista) else {}
         filas.append(
             {
                 "No.": i + 1,
@@ -36,8 +33,8 @@ def _filas(contenido: dict, image_results: dict) -> list[dict]:
                 "Copy completo": post.get("copy_completo", ""),
                 "Hashtags": ", ".join(post.get("hashtags", [])),
                 "CTA": post.get("cta", ""),
-                "Ruta imagen": imagen_post.get("ruta_imagen", ""),
-                "Estado": post.get("estado") or imagen_post.get("estado", "GENERADO"),
+                "Ruta imagen": post.get("ruta_imagen", ""),
+                "Estado": post.get("estado", "GENERADO"),
             }
         )
     return filas
@@ -78,16 +75,14 @@ def _generar_checklist(filas: list[dict], path: Path) -> None:
     path.write_text("\n".join(lineas), encoding="utf-8")
 
 
-def generate_output(
-    contenido: dict, image_results: dict, brief: ClientBrief, output_dir: str | Path
-) -> dict:
+def generate_output(contenido: dict, brief: ClientBrief, output_dir: str | Path) -> dict:
     """Genera resumen_calendario.xlsx, resumen_calendario.md y checklist_publicacion.md.
 
-    contenido: salida del skill estrategia-copy (un solo dict con estrategia+copy fusionados).
-    image_results: salida del skill/paso de imágenes.
+    contenido: salida final de chequeo-marca (estrategia+copy+imagen+estado
+    ya consolidados por post_id, ver PLAN_MAESTRO.md).
     """
     output_dir = Path(output_dir)
-    filas = _filas(contenido, image_results)
+    filas = _filas(contenido)
 
     xlsx_path = output_dir / "resumen_calendario.xlsx"
     md_path = output_dir / "resumen_calendario.md"

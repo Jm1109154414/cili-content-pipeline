@@ -33,6 +33,9 @@ referencia adicional descrito abajo.
 1. Distribuye los posts respetando `frecuencia_semanal` y las `plataformas`
    del brief, repartidos a lo largo del mes.
 2. Cada post debe declarar:
+   - `post_id` (secuencial: `post_01`, `post_02`, ... — ver "Convención de
+     nombres" en `PLAN_MAESTRO.md`. **Los skills posteriores usan este id
+     para referirse al post, nunca la posición en la lista.**)
    - `fecha` (dentro del mes del brief)
    - `plataforma` (una de: Instagram, LinkedIn, Facebook, TikTok)
    - `tipo`: `imagen_sola` | `carrusel` | `reel` | `historia` | `video_corto`
@@ -120,6 +123,7 @@ resultados sin dato que los respalde. No uses lenguaje técnico sin explicarlo.
 {
   "posts": [
     {
+      "post_id": "post_01",
       "fecha": "2026-07-03",
       "plataforma": "LinkedIn",
       "tipo": "carrusel",

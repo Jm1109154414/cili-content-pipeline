@@ -1,0 +1,94 @@
+---
+name: imagenes
+description: Genera la imagen final de cada post del mes (vía Ideogram 3.0), a partir de la salida del skill estrategia-copy y los estándares de marca del brief. Usar después de que estrategia-copy produjo el contenido del mes, antes del chequeo de marca y del entregable final.
+---
+
+# Generación de imágenes
+
+Generas la imagen final de cada post, alineada a la marca del cliente, usando
+**Ideogram 3.0** (especializado en tipografía y texto legible dentro de
+imagen — el motor elegido en `COSTOS.md` y `PLAN_MAESTRO.md`).
+
+## Cuándo se usa
+
+Después de que el skill `estrategia-copy` generó el contenido del mes (un post
+por entrada, cada uno con `idea_visual`, `plataforma` y `tipo`). Antes del
+chequeo de marca y de armar el entregable final (`output_formatter.py`).
+
+## Entrada
+
+- La salida de `estrategia-copy`: lista de posts, cada uno con al menos
+  `fecha`, `plataforma`, `tipo`, `idea_visual` y `gancho`/`copy_completo`.
+- El brief del cliente: necesitas `colores_hex`, `estilo_visual`, `evitar` y
+  `tres_palabras_marca` para que la imagen respete la identidad de marca.
+
+## Paso 1 — Construir el prompt de imagen (por post)
+
+Para cada post, escribe un prompt en **inglés** para Ideogram 3.0 que incluya:
+
+- **Estilo:** uno de `tipographic | infographic | abstract | diagram | dark_corporate`,
+  elegido según `estilo_visual` del brief y el `tipo` del post.
+- **Colores:** deben respetar `colores_hex` del brief — menciónalos explícitamente
+  en el prompt (Ideogram sigue bien instrucciones de paleta).
+- **Texto/datos dentro de la imagen:** si el post lleva un dato, cifra o frase
+  corta (el `gancho`, o un número del brief como "+2,000 certificados"),
+  inclúyelo explícitamente en el prompt — es la fortaleza de Ideogram 3.0,
+  úsala.
+- **Qué evitar:** nunca fotografía de stock de personas sonriendo en oficina,
+  nunca watermarks, nunca texto genérico de relleno. Respeta también el campo
+  `evitar` del brief.
+- **Mood:** referencia las `tres_palabras_marca` del brief.
+
+Reglas duras (no negociables, igual para cualquier cliente):
+- Prioriza diseño tipográfico/gráfico sobre fotografía de personas.
+- Si el post lleva datos o números, deben aparecer legibles en la imagen.
+- Sin watermarks, sin texto de relleno, sin personas de stock obvias.
+- La imagen debe verse premium y diferenciada, nunca genérica de IA.
+
+## Paso 2 — Dimensiones por plataforma
+
+| Plataforma / tipo | Dimensiones |
+|---|---|
+| Instagram post | 1080x1350px |
+| Instagram reel cover | 1080x1920px |
+| LinkedIn | 1200x627px |
+| Facebook | 1200x630px |
+| TikTok cover | 1080x1920px |
+
+## Paso 3 — Generar con Ideogram 3.0
+
+Usa la tool nativa de imagen de OpenClaw apuntando a Ideogram 3.0 (tier turbo,
+$0.03/imagen — ver `COSTOS.md`). Si Ideogram no está disponible o falla,
+plan B en este orden: Imagen 4 (Google) → GPT Image 1.5.
+
+Guarda cada imagen en `output/{cliente}/{mes}/imagenes/post_{NN}_{plataforma}_{fecha}/imagen.png`,
+y junto a ella un `copy.txt` con el `copy_completo` de ese post (para que el
+equipo revise imagen+texto juntos).
+
+## Manejo de errores
+
+Si la generación de una imagen falla:
+1. Reintenta una vez.
+2. Si vuelve a fallar, genera un placeholder simple (fondo de color de marca +
+   el gancho del post como texto) y marca ese post como `"estado": "IMAGEN_PENDIENTE"`.
+3. Continúa con el siguiente post — nunca detengas el lote completo por una imagen.
+4. Registra el error en `output/{cliente}/{mes}/errores.log`
+   (`timestamp | IMAGEN_ERROR | post_NN | detalle`).
+
+## Salida esperada (JSON)
+
+```json
+{
+  "posts": [
+    {
+      "post": "post_01_instagram_2026-07-03",
+      "ruta_imagen": "output/cili/julio_2026/imagenes/post_01_instagram_2026-07-03/imagen.png",
+      "ruta_copy": "output/cili/julio_2026/imagenes/post_01_instagram_2026-07-03/copy.txt",
+      "estado": "GENERADO"
+    }
+  ]
+}
+```
+
+Este JSON, en el mismo orden que los posts de `estrategia-copy`, alimenta
+directo `pipeline/output_formatter.py` (columnas "Ruta imagen" y "Estado").

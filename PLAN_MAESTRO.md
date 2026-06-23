@@ -55,10 +55,10 @@ prompts blindados para todo lo demás; OpenClaw como cerebro que coordina.
 | Cron (scheduler) | Disparar el contenido el día 1 de cada mes (reemplaza n8n) |
 | Memoria por sesión/cliente | Reanudar conversaciones, recordar clientes recurrentes |
 | Navegador + búsqueda web | Pre-llenar el brief leyendo web y redes del cliente |
-| image_generate | Generación de imágenes (DALL-E / SD / Midjourney) |
-| video_generate | Reels y TikToks en video real (fase futura) |
-| tts (texto a voz) | Voiceover de los Reels (fase futura) |
-| music_generate | Música de fondo sin copyright (fase futura) |
+| image_generate | Generación de imágenes — **Ideogram 3.0** elegido (especializado en tipografía/texto dentro de imagen, $0.03/img) |
+| video_generate | Reels y TikToks en video real — **Kling 3.0** elegido ($0.10/seg, buen equilibrio calidad/precio). Fase futura |
+| tts (texto a voz) | Voiceover de los Reels — OpenAI TTS (~$0.015/min). Fase futura |
+| music_generate | Música de fondo sin copyright — Suno (~$0.05-0.11/canción). Fase futura |
 | subagents | Generar varios posts en paralelo |
 | read/write/edit | Crear brief.json, leer/editar el Excel sin tocar terminal |
 
@@ -158,7 +158,10 @@ en el guión del skill conversacional.
 7. Memoria de meses anteriores (no repetir)
 
 ### DESPUÉS — diferenciadores, requieren cuidar calidad
-8. Video real para Reels/TikTok (video_generate + tts + music_generate)
+8. Video real para Reels/TikTok (Kling 3.0 + TTS + Suno) — **se cobra aparte**,
+   el costo (~$150-185 MXN/mes por 4-5 Reels) ya no es trivial como texto/imagen.
+   Se descartó CapCut: es editor manual sin API, no genera video desde prompt
+   y rompería la automatización (requeriría simular clics en pantalla).
 9. Disparo automático mensual por cron
 
 ### CON PINZAS — frágil o sin datos

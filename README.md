@@ -16,13 +16,14 @@ están en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo primero.
 | `prompts/reference_banco_temas_cili.md` | Banco real de temas por certificación (Yellow/Green/Black Belt) + 5 ejemplos ya redactados, extraído del mismo Excel |
 | `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto (se queda en código) |
 | `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final (se queda en código) |
-| `prompts/*.txt` | Prompts de referencia — insumo para escribir los SKILL.md de OpenClaw |
+| `skills/estrategia-copy/SKILL.md` | ✅ **Skill construido** — genera estrategia + copy del mes en un solo paso, usando el framework propio de CiLi |
+| `prompts/image_prompt.txt` | Prompt de referencia para el futuro skill de imágenes (pendiente de construir) |
 
 > **Nota:** los generadores de estrategia, copy e imagen (que antes eran scripts
 > Python sueltos) se retiraron de este repo. Según `PLAN_MAESTRO.md`, esa lógica
-> se construye como **skills de OpenClaw** (prompts blindados dentro de
-> `SKILL.md`), no como CLI manual. `prompts/*.txt` queda como insumo de
-> referencia para escribir esos skills.
+> se construye como **skills de OpenClaw** (instrucciones en `SKILL.md`, no CLI
+> manual). El primero ya está construido (`skills/estrategia-copy/`); el de
+> imágenes sigue pendiente — `prompts/image_prompt.txt` es su insumo de referencia.
 
 ## Setup (para lo que sí es código)
 

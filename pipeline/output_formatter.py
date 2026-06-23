@@ -12,15 +12,14 @@ COLUMNAS = [
 ]
 
 
-def _filas(strategy: dict, copies: dict, image_results: dict) -> list[dict]:
-    posts_strategy = strategy.get("posts", [])
-    posts_copies = copies.get("posts", [])
-    posts_imagenes = {p["post"]: p for p in image_results.get("posts", [])}
+def _filas(contenido: dict, image_results: dict) -> list[dict]:
+    """contenido viene del skill estrategia-copy: {"posts": [{fecha, plataforma,
+    tipo, objetivo, gancho, copy_completo, hashtags, cta, ...}]}."""
+    posts_contenido = contenido.get("posts", [])
     imagenes_lista = image_results.get("posts", [])
 
     filas = []
-    for i, post in enumerate(posts_strategy):
-        copy_post = posts_copies[i] if i < len(posts_copies) else {}
+    for i, post in enumerate(posts_contenido):
         imagen_post = imagenes_lista[i] if i < len(imagenes_lista) else {}
         filas.append(
             {
@@ -29,12 +28,12 @@ def _filas(strategy: dict, copies: dict, image_results: dict) -> list[dict]:
                 "Plataforma": post.get("plataforma", ""),
                 "Tipo": post.get("tipo", ""),
                 "Objetivo": post.get("objetivo", ""),
-                "Gancho": copy_post.get("gancho", ""),
-                "Copy completo": copy_post.get("copy_completo", ""),
-                "Hashtags": ", ".join(copy_post.get("hashtags", [])),
-                "CTA": copy_post.get("cta", ""),
+                "Gancho": post.get("gancho", ""),
+                "Copy completo": post.get("copy_completo", ""),
+                "Hashtags": ", ".join(post.get("hashtags", [])),
+                "CTA": post.get("cta", ""),
                 "Ruta imagen": imagen_post.get("ruta_imagen", ""),
-                "Estado": imagen_post.get("estado", "PENDIENTE_MANUAL" if not copy_post else "GENERADO"),
+                "Estado": post.get("estado") or imagen_post.get("estado", "GENERADO"),
             }
         )
     return filas
@@ -76,11 +75,15 @@ def _generar_checklist(filas: list[dict], path: Path) -> None:
 
 
 def generate_output(
-    strategy: dict, copies: dict, image_results: dict, brief: ClientBrief, output_dir: str | Path
+    contenido: dict, image_results: dict, brief: ClientBrief, output_dir: str | Path
 ) -> dict:
-    """Genera resumen_calendario.xlsx, resumen_calendario.md y checklist_publicacion.md."""
+    """Genera resumen_calendario.xlsx, resumen_calendario.md y checklist_publicacion.md.
+
+    contenido: salida del skill estrategia-copy (un solo dict con estrategia+copy fusionados).
+    image_results: salida del skill/paso de imágenes.
+    """
     output_dir = Path(output_dir)
-    filas = _filas(strategy, copies, image_results)
+    filas = _filas(contenido, image_results)
 
     xlsx_path = output_dir / "resumen_calendario.xlsx"
     md_path = output_dir / "resumen_calendario.md"

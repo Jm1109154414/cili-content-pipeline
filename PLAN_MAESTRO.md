@@ -134,9 +134,9 @@ Gracias a que OpenClaw absorbe trabajo, pasamos de **8 archivos Python** a
 |---|---|
 | brief_schema.py | ✅ Se queda (validar entrada) |
 | output_formatter.py | ✅ Se queda (armar Excel) |
-| strategy_generator.py | → Skill (prompt blindado) |
-| copy_generator.py | → Skill (prompt blindado) |
-| image_generator.py | → Skill / nativo OpenClaw |
+| strategy_generator.py | → ✅ Skill construido: `skills/estrategia-copy/SKILL.md` |
+| copy_generator.py | → ✅ Fusionado en el mismo skill `estrategia-copy` |
+| image_generator.py | → Skill / nativo OpenClaw (pendiente) |
 | image_prompt_generator.py | ❌ Se fusiona (un paso menos) |
 | pipeline.py (orquestador) | ❌ Lo reemplaza OpenClaw |
 | utils.py (retry + reanudación) | ❌ Innecesario (OpenClaw ya lo trae) |

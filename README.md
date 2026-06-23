@@ -29,6 +29,41 @@ primero.
    pytest -q
    ```
 
+## Uso mensual (una vez instalado)
+
+Esto no se ejecuta con comandos de terminal — le hablas a OpenClaw (por su
+WebChat o la interfaz que uses) y él encadena los skills. Por cliente, cada
+mes:
+
+1. **Dar de alta o actualizar al cliente:**
+   > "Quiero dar de alta a [cliente] / necesito el brief de [cliente] para
+   > este mes."
+
+   Dispara `onboarding`. Si es cliente nuevo, platica las 6 secciones del
+   brief; si es recurrente, solo pregunta lo del mes (Sección F). Entrega
+   `briefs/{cliente}_{mes}.json` ya validado, después de que el cliente
+   confirma el resumen (checkpoint 1).
+
+2. **Generar el contenido del mes:**
+   > "Genera el contenido de [cliente] de este mes."
+
+   Encadena `estrategia-copy` → `imagenes` → `chequeo-marca`, y al final
+   corre `pipeline.output_formatter.generate_output()` (código, no skill) que
+   entrega `resumen_calendario.xlsx` en `output/{cliente}/{mes}/`.
+
+3. **Notificar y aprobar:**
+   > "Notifica que el contenido de [cliente] está listo."
+
+   Dispara `notificacion-aprobacion` — avisa por el medio configurado
+   (`brief.medio_aprobacion`: WhatsApp/Excel/ambos) y registra cuando el
+   equipo aprueba o pide cambios a un post puntual (checkpoint 2).
+
+4. **Publicar:** manual, fuera del sistema — ver `PLAN_MAESTRO.md`.
+
+> Para probar el flujo sin pasar por el onboarding completo, copia
+> `examples/cili/cili_julio_2026.json` a `briefs/cili_julio_2026.json` y
+> arranca directo en el paso 2.
+
 ## Qué es el motor genérico (esto NO se borra, sirve para cualquier cliente)
 
 | Carpeta/archivo | Qué es |

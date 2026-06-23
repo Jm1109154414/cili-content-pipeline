@@ -32,10 +32,16 @@ def test_generate_output_crea_archivos(tmp_path):
     assert Path(salidas["xlsx"]).exists()
     assert Path(salidas["md"]).exists()
     assert Path(salidas["checklist"]).exists()
+    assert Path(salidas["historial"]).exists()
 
     contenido_md = Path(salidas["md"]).read_text(encoding="utf-8")
     assert "Gancho de prueba" in contenido_md
     assert "GENERADO" in contenido_md
+
+    import json
+
+    historial = json.loads(Path(salidas["historial"]).read_text(encoding="utf-8"))
+    assert historial == CONTENIDO
 
 
 def test_generate_output_crea_directorio_si_no_existe(tmp_path):

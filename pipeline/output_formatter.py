@@ -5,6 +5,7 @@ from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 
 from .brief_schema import ClientBrief
+from .historial import guardar_contenido_final
 
 COLUMNAS = [
     "No.", "Fecha", "Plataforma", "Tipo", "Objetivo", "Gancho",
@@ -76,7 +77,8 @@ def _generar_checklist(filas: list[dict], path: Path) -> None:
 
 
 def generate_output(contenido: dict, brief: ClientBrief, output_dir: str | Path) -> dict:
-    """Genera resumen_calendario.xlsx, resumen_calendario.md y checklist_publicacion.md.
+    """Genera resumen_calendario.xlsx, resumen_calendario.md, checklist_publicacion.md
+    y contenido_final.json (historial para que meses futuros no repitan temas).
 
     contenido: salida final de chequeo-marca (estrategia+copy+imagen+estado
     ya consolidados por post_id, ver PLAN_MAESTRO.md).
@@ -92,5 +94,11 @@ def generate_output(contenido: dict, brief: ClientBrief, output_dir: str | Path)
     _generar_xlsx(filas, xlsx_path)
     _generar_md(filas, brief, md_path)
     _generar_checklist(filas, checklist_path)
+    historial_path = guardar_contenido_final(contenido, output_dir)
 
-    return {"xlsx": str(xlsx_path), "md": str(md_path), "checklist": str(checklist_path)}
+    return {
+        "xlsx": str(xlsx_path),
+        "md": str(md_path),
+        "checklist": str(checklist_path),
+        "historial": str(historial_path),
+    }

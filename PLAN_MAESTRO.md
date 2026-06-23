@@ -38,7 +38,8 @@ prompts blindados para todo lo demás; OpenClaw como cerebro que coordina.
 │  CAPA 3 — NUESTROS SKILLS (el estándar y el control)    │
 │  • SKILL.md → reglas de marca, plataformas, qué evitar  │
 │  • Prompts blindados → estrategia, copy                 │
-│  • Scripts Python (solo 2) → validar brief + armar Excel│
+│  • Scripts Python (solo 3) → validar brief + armar Excel│
+│    + guardar/consultar historial                        │
 │  Para imágenes/video/voz/música: SKILL.md guía tools    │
 │  nativas de OpenClaw                                     │
 └─────────────────────────────────────────────────────────┘
@@ -91,7 +92,8 @@ PASO 2 — GENERACIÓN (skills con prompts blindados)
   • Estrategia del mes (skill)
   • Copy por post y plataforma (skill)  ← puede usar subagentes
   • Imágenes (skill / nativo, guiado por estándares de marca)
-  • Memoria: revisa meses anteriores para NO repetir contenido
+  • Memoria: `pipeline.historial.cargar_temas_anteriores()` trae los temas
+    ya usados (lee `output/{cliente}/*/contenido_final.json`) para NO repetir
         │
         ▼
 PASO 3 — CHEQUEO DE MARCA (skill construido: skills/chequeo-marca/SKILL.md)
@@ -200,12 +202,15 @@ asignaría el estado o la imagen al post equivocado.
 ## QUÉ SE SIMPLIFICÓ (recorte de redundancias)
 
 Gracias a que OpenClaw absorbe trabajo, pasamos de **8 archivos Python** a
-**2 piezas duras + skills**:
+**3 piezas duras + skills** (la tercera, `historial.py`, se agregó después
+para persistir y consultar el contenido de meses anteriores — ver sección
+de Memoria más abajo):
 
 | Pieza original | Destino |
 |---|---|
 | brief_schema.py | ✅ Se queda (validar entrada) |
-| output_formatter.py | ✅ Se queda (armar Excel) |
+| output_formatter.py | ✅ Se queda (armar Excel + guardar historial) |
+| historial.py | ✅ Nuevo — guarda/consulta `contenido_final.json` por cliente/mes |
 | strategy_generator.py | → ✅ Skill construido: `skills/estrategia-copy/SKILL.md` |
 | copy_generator.py | → ✅ Fusionado en el mismo skill `estrategia-copy` |
 | image_generator.py | → ✅ Skill construido: `skills/imagenes/SKILL.md` (GPT Image 2) |
@@ -227,7 +232,8 @@ en el guión del skill conversacional.
 4. ✅ Chequeo de marca — `skills/chequeo-marca/SKILL.md`
 5. ✅ Validación (brief_schema) + Excel (output_formatter) en código
 6. ❌ Notificación y aprobación por el medio configurable — pendiente
-7. ❌ Memoria de meses anteriores (no repetir) — pendiente
+7. ✅ Memoria de meses anteriores (no repetir) — `pipeline/historial.py`,
+   usado por `skills/estrategia-copy/SKILL.md`
 
 ### DESPUÉS — diferenciadores, requieren cuidar calidad
 8. Video real para Reels/TikTok (Kling 3.0 + TTS + Suno) — **se cobra aparte**,

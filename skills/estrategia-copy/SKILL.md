@@ -27,8 +27,12 @@ propio, también ese (ver "Entrada" abajo).
   obligatorio. CiLi es el caso piloto que hoy vive en `examples/cili/`, pero
   la regla aplica igual a cualquier cliente real con su propia carpeta en
   `clientes/`.
-- Si existen meses anteriores del mismo cliente en `output/{cliente}/`, revísalos
-  para **no repetir** temas ya publicados.
+- **Temas ya usados en meses anteriores:** llama a
+  `pipeline.historial.cargar_temas_anteriores("{cliente}")` (slug del
+  cliente — ver "Convención de nombres") para obtener la lista de `tema` de
+  todos los posts ya publicados. No repitas ninguno de esos temas este mes,
+  salvo que el brief pida explícitamente revisitar uno (`evento_especial`,
+  `descripcion_objetivo`).
 
 ## Reglas de la estrategia (qué publicar)
 
@@ -38,6 +42,10 @@ propio, también ese (ver "Entrada" abajo).
    - `post_id` (secuencial: `post_01`, `post_02`, ... — ver "Convención de
      nombres" en `PLAN_MAESTRO.md`. **Los skills posteriores usan este id
      para referirse al post, nunca la posición en la lista.**)
+   - `tema` (etiqueta corta de 2-4 palabras del tema de fondo, ej. "SIPOC",
+     "5 S's", "Certificación Black Belt" — esto es lo que se guarda en el
+     historial para que meses futuros no lo repitan; sé consistente con la
+     etiqueta exacta del banco de temas del cliente si existe)
    - `fecha` (dentro del mes del brief)
    - `plataforma` (una de: Instagram, LinkedIn, Facebook, TikTok)
    - `tipo`: `imagen_sola` | `carrusel` | `reel` | `historia` | `video_corto`
@@ -122,6 +130,7 @@ resultados sin dato que los respalde. No uses lenguaje técnico sin explicarlo.
   "posts": [
     {
       "post_id": "post_01",
+      "tema": "SIPOC",
       "fecha": "2026-07-03",
       "plataforma": "LinkedIn",
       "tipo": "carrusel",

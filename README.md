@@ -15,8 +15,8 @@ primero.
 3. Configura tus API keys (Claude, OpenAI) **dentro de OpenClaw**
    (`~/.openclaw/openclaw.json`), no en este repo — este repo no las usa
    directamente (ver `.env.example`).
-4. Instala las dependencias de Python de las 2 piezas de código que sí corren
-   localmente (validación de brief + armado de Excel):
+4. Instala las dependencias de Python de las 3 piezas de código que sí corren
+   localmente (validación de brief, armado de Excel, historial):
 
    ```bash
    python -m venv .venv
@@ -41,7 +41,8 @@ primero.
 | `briefs/FORMULARIO_ONBOARDING.md` | Guion de preguntas que usa `onboarding` |
 | `briefs/_template_brief.json` | Plantilla vacía del brief — válida para cualquier cliente |
 | `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto |
-| `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final |
+| `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final + guarda el historial |
+| `pipeline/historial.py` | Guarda/consulta `contenido_final.json` por cliente — usado por `estrategia-copy` para no repetir temas |
 | `tests/` | Pruebas del motor — usan un fixture genérico propio (`tests/fixtures/`), no dependen de `examples/` |
 
 Los briefs reales de clientes en producción se guardan en
@@ -61,5 +62,4 @@ probando el flujo con datos reales mientras se valida el sistema.
 
 ## Lo que falta construir (ver `PLAN_MAESTRO.md`, sección FASES)
 
-Notificación/aprobación del equipo (checkpoint 2) y memoria de meses
-anteriores para no repetir contenido.
+Notificación/aprobación del equipo (checkpoint 2).

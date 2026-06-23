@@ -18,6 +18,7 @@ están en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo primero.
 | `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final (se queda en código) |
 | `skills/estrategia-copy/SKILL.md` | ✅ **Skill construido** — genera estrategia + copy del mes en un solo paso, usando el framework propio de CiLi |
 | `skills/imagenes/SKILL.md` | ✅ **Skill construido** — genera la imagen de cada post vía Ideogram 3.0, alineada a marca |
+| `skills/chequeo-marca/SKILL.md` | ✅ **Skill construido** — revisa el contenido del mes contra "evitar"/"temas_a_evitar" del brief antes de entregar |
 
 > **Nota:** los generadores de estrategia, copy e imagen (que antes eran scripts
 > Python sueltos) se retiraron de este repo. Según `PLAN_MAESTRO.md`, esa lógica

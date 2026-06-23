@@ -94,9 +94,10 @@ PASO 2 — GENERACIÓN (skills con prompts blindados)
   • Memoria: revisa meses anteriores para NO repetir contenido
         │
         ▼
-PASO 3 — CHEQUEO DE MARCA (skill corto)
+PASO 3 — CHEQUEO DE MARCA (skill construido: skills/chequeo-marca/SKILL.md)
   • Verifica que ningún post viole "evitar" / "temas_a_evitar"
-  • Marca los dudosos para revisión humana
+  • Verifica que las cifras citadas existan en el brief (no inventadas)
+  • Marca los dudosos (estado: REVISAR_MARCA) sin detener el resto del mes
         │
         ▼
 PASO 4 — ENTREGABLE (script Python)
@@ -149,13 +150,13 @@ en el guión del skill conversacional.
 ## FASES
 
 ### AHORA (esta etapa) — bajo riesgo, alto valor
-1. Agente de onboarding por WebChat (con auto-fill de web/redes y memoria de cliente)
-2. Skills de estrategia y copy (prompts blindados)
-3. Imágenes (skill / nativo)
-4. Chequeo de marca
-5. Validación (brief_schema) + Excel (output_formatter) en código
-6. Notificación y aprobación por el medio configurable
-7. Memoria de meses anteriores (no repetir)
+1. ❌ Agente de onboarding por WebChat (con auto-fill de web/redes y memoria de cliente) — pendiente
+2. ✅ Skills de estrategia y copy — `skills/estrategia-copy/SKILL.md`
+3. ✅ Imágenes — `skills/imagenes/SKILL.md` (Ideogram 3.0)
+4. ✅ Chequeo de marca — `skills/chequeo-marca/SKILL.md`
+5. ✅ Validación (brief_schema) + Excel (output_formatter) en código
+6. ❌ Notificación y aprobación por el medio configurable — pendiente
+7. ❌ Memoria de meses anteriores (no repetir) — pendiente
 
 ### DESPUÉS — diferenciadores, requieren cuidar calidad
 8. Video real para Reels/TikTok (Kling 3.0 + TTS + Suno) — **se cobra aparte**,

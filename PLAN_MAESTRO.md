@@ -150,7 +150,7 @@ en el guión del skill conversacional.
 ## FASES
 
 ### AHORA (esta etapa) — bajo riesgo, alto valor
-1. ❌ Agente de onboarding por WebChat (con auto-fill de web/redes y memoria de cliente) — pendiente
+1. ✅ Agente de onboarding por WebChat — `skills/onboarding/SKILL.md` (auto-fill de web/redes, insiste en respuestas vagas, checkpoint 1 con el cliente)
 2. ✅ Skills de estrategia y copy — `skills/estrategia-copy/SKILL.md`
 3. ✅ Imágenes — `skills/imagenes/SKILL.md` (GPT Image 2)
 4. ✅ Chequeo de marca — `skills/chequeo-marca/SKILL.md`

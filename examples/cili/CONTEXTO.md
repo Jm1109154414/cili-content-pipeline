@@ -4,7 +4,7 @@
 
 > ⚠️ **Documento histórico.** Este es el plan original (CLI manual en Python,
 > DALL-E 3, n8n para automatizar). La arquitectura **vigente** está en
-> [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — OpenClaw como orquestador, skills en
+> [`PLAN_MAESTRO.md`](../../PLAN_MAESTRO.md) — OpenClaw como orquestador, skills en
 > `/skills` (ya construidos: onboarding, estrategia-copy, imagenes, chequeo-marca),
 > **GPT Image 2** para imagen, Kling 3.0 para video. Se conserva este archivo
 > como bitácora del razonamiento de negocio (quién es CiLi, el SIPOC de

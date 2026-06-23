@@ -1,44 +1,64 @@
-# CiLi Content Pipeline
+# Content Pipeline — skill pack para OpenClaw
 
-Pipeline de contenido orgánico automatizado. La visión y arquitectura vigentes
-están en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo primero.
+Motor genérico de marketing de contenido orgánico: dado el brief de **cualquier
+cliente**, conversa con él, genera la estrategia y copy del mes, las imágenes,
+y un chequeo de marca, listo para que un equipo lo revise y publique. La
+arquitectura completa está en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo
+primero.
 
-## Qué hay en este repo
+## Instalación en OpenClaw
+
+1. Descarga/clona este repo en la máquina donde corre tu OpenClaw.
+2. Copia (o enlaza) la carpeta `skills/` dentro del workspace de OpenClaw,
+   para que detecte los 4 skills (`onboarding`, `estrategia-copy`, `imagenes`,
+   `chequeo-marca`) en su `<available_skills>`.
+3. Configura tus API keys (Claude, OpenAI) **dentro de OpenClaw**
+   (`~/.openclaw/openclaw.json`), no en este repo — este repo no las usa
+   directamente (ver `.env.example`).
+4. Instala las dependencias de Python de las 2 piezas de código que sí corren
+   localmente (validación de brief + armado de Excel):
+
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate        # Windows
+   pip install -r requirements.txt
+   ```
+5. Corre los tests para confirmar que el motor genérico funciona en tu máquina:
+
+   ```bash
+   pytest -q
+   ```
+
+## Qué es el motor genérico (esto NO se borra, sirve para cualquier cliente)
 
 | Carpeta/archivo | Qué es |
 |---|---|
-| `PLAN_MAESTRO.md` | La arquitectura vigente (OpenClaw como orquestador + skills) |
-| `COSTOS.md` | Estimación de costo de APIs por cliente al mes |
-| `briefs/FORMULARIO_ONBOARDING.md` | Guion de preguntas — base del skill conversacional de onboarding |
-| `briefs/_template_brief.json` | Plantilla vacía del brief de cliente |
-| `briefs/*.json` | Briefs de clientes ya capturados |
-| `briefs/cili_pilares_completo.md` | Dolores/deseos/certezas/avatar reales de CiLi + su framework propio de copywriting (P/B/C/S/TI/I/CN), extraído de `Pilares de contenido (2).xlsx` |
-| `prompts/reference_banco_temas_cili.md` | Banco real de temas por certificación (Yellow/Green/Black Belt) + 5 ejemplos ya redactados, extraído del mismo Excel |
-| `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto (se queda en código) |
-| `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final (se queda en código) |
-| `skills/estrategia-copy/SKILL.md` | ✅ **Skill construido** — genera estrategia + copy del mes en un solo paso, usando el framework propio de CiLi |
-| `skills/imagenes/SKILL.md` | ✅ **Skill construido** — genera la imagen de cada post vía **GPT Image 2** (OpenAI), alineada a marca |
-| `skills/chequeo-marca/SKILL.md` | ✅ **Skill construido** — revisa el contenido del mes contra "evitar"/"temas_a_evitar" del brief antes de entregar |
-| `skills/onboarding/SKILL.md` | ✅ **Skill construido** — platica con el cliente, pre-llena leyendo su web/redes, produce el brief él mismo |
+| `PLAN_MAESTRO.md` | Arquitectura completa: flujo, vocabulario de estados, convención de nombres |
+| `skills/onboarding/SKILL.md` | Conversa con el cliente, pre-llena leyendo su web/redes, produce su brief |
+| `skills/estrategia-copy/SKILL.md` | Genera estrategia + copy del mes a partir del brief |
+| `skills/imagenes/SKILL.md` | Genera la imagen de cada post (GPT Image 2) |
+| `skills/chequeo-marca/SKILL.md` | Revisa el contenido contra los estándares de marca antes de entregar |
+| `briefs/FORMULARIO_ONBOARDING.md` | Guion de preguntas que usa `onboarding` |
+| `briefs/_template_brief.json` | Plantilla vacía del brief — válida para cualquier cliente |
+| `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto |
+| `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final |
 
-> **Nota:** los generadores de estrategia, copy e imagen (que antes eran scripts
-> Python sueltos) se retiraron de este repo. Según `PLAN_MAESTRO.md`, esa lógica
-> se construye como **skills de OpenClaw** (instrucciones en `SKILL.md`, no CLI
-> manual). Los 4 skills del flujo "AHORA" ya están construidos en `/skills`
-> (onboarding, estrategia-copy, imagenes, chequeo-marca). Faltan los de
-> notificación/aprobación del equipo y memoria de meses anteriores — ver
-> `PLAN_MAESTRO.md` sección FASES.
+Los briefs reales de clientes en producción se guardan en
+`briefs/{cliente}_{mes}.json` (los crea `onboarding`). Si un cliente tiene
+material de referencia propio (su framework de copywriting, su banco de
+temas), va en `clientes/{cliente}/` — ver convención de nombres en
+`PLAN_MAESTRO.md`.
 
-## Setup (para lo que sí es código)
+## `examples/cili/` — caso de demostración, **se puede borrar**
 
-```bash
-python -m venv .venv
-.venv\Scripts\activate        # Windows
-pip install -r requirements.txt
-```
+Esta carpeta contiene el caso piloto (CiLi) usado para probar el sistema: su
+brief de ejemplo, su material de pilares/banco de temas, y documentación de
+negocio específica de CiLi (contexto, costos, notas de junta). **No es parte
+del motor** — bórrala completa (`rm -rf examples/`) y el resto del repo sigue
+funcionando igual para cualquier cliente nuevo. Se deja aquí para seguir
+probando el flujo con datos reales mientras se valida el sistema.
 
-## Tests
+## Lo que falta construir (ver `PLAN_MAESTRO.md`, sección FASES)
 
-```bash
-pytest -q
-```
+Notificación/aprobación del equipo (checkpoint 2) y memoria de meses
+anteriores para no repetir contenido.

@@ -2,7 +2,9 @@ from pipeline.brief_schema import ClientBrief
 from pipeline.output_formatter import generate_output
 from pathlib import Path
 
-BRIEF_VALIDO = Path(__file__).parent.parent / "briefs" / "cili_julio_2026.json"
+# Fixture genérico, desacoplado de cualquier cliente real (no depende de
+# examples/, que es desechable — ver README.md).
+BRIEF_VALIDO = Path(__file__).parent / "fixtures" / "brief_valido_generico.json"
 
 CONTENIDO = {
     "posts": [

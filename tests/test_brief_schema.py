@@ -2,13 +2,15 @@ from pathlib import Path
 
 from pipeline.brief_schema import ClientBrief, validate_and_report
 
-BRIEF_VALIDO = Path(__file__).parent.parent / "briefs" / "cili_julio_2026.json"
+# Fixture genérico, desacoplado de cualquier cliente real (no depende de
+# examples/, que es desechable — ver README.md).
+BRIEF_VALIDO = Path(__file__).parent / "fixtures" / "brief_valido_generico.json"
 
 
 def test_carga_brief_valido():
     brief = ClientBrief.from_json(BRIEF_VALIDO)
-    assert brief.empresa.startswith("CiLi")
-    assert brief.frecuencia_semanal == 5
+    assert brief.empresa == "Acme Consultoría"
+    assert brief.frecuencia_semanal == 3
 
 
 def test_validate_and_report_brief_valido():

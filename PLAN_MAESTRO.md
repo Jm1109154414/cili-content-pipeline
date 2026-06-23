@@ -153,7 +153,7 @@ tenía ya un estado de falla previo.
 
 ## CONVENCIÓN DE NOMBRES (fuente de verdad — todos los skills deben usar esto)
 
-Varios skills construyen rutas de archivo (`briefs/{cliente}_pilares_completo.md`,
+Varios skills construyen rutas de archivo (`briefs/{cliente}_{mes}.json`,
 `output/{cliente}/{mes}/...`). Para que todos generen la misma ruta para el
 mismo cliente, el slug se calcula siempre así:
 
@@ -163,10 +163,29 @@ mismo cliente, el slug se calcula siempre así:
 - **`{mes}`:** el campo `mes` del brief (ej. `"Julio 2026"`), en minúsculas,
   sin acentos, espacio reemplazado por `_`. Ej: `"Julio 2026"` → `julio_2026`.
 
-Con esto: el brief de CiLi de julio 2026 vive en `briefs/cili_julio_2026.json`,
-su material de referencia en `briefs/cili_pilares_completo.md` (sin mes — es
-información que no cambia mes a mes) y `prompts/reference_banco_temas_cili.md`,
-y su output del mes en `output/cili/julio_2026/`.
+### `briefs/` vs `clientes/{cliente}/` vs `examples/{cliente}/`
+
+- **`briefs/{cliente}_{mes}.json`:** el brief mensual real de un cliente en
+  producción, lo produce `onboarding`.
+- **`clientes/{cliente}/`:** material de referencia propio de un cliente real
+  que no cambia mes a mes (su versión de `{cliente}_pilares_completo.md`,
+  `reference_banco_temas_{cliente}.md`, etc.) — **opcional**, solo si el
+  cliente tiene este material. `estrategia-copy` lo busca aquí primero.
+- **`examples/{cliente}/`:** material de **demostración**, no de producción.
+  Es **desechable** — se puede borrar toda la carpeta `examples/` y el motor
+  (skills + `pipeline/`) sigue funcionando igual para cualquier cliente nuevo.
+  CiLi vive aquí (`examples/cili/`) como el caso piloto con el que se prueba
+  el sistema; incluye su brief de ejemplo, su material de pilares/banco de
+  temas, y la documentación de negocio específica de CiLi (`CONTEXTO.md`,
+  `COSTOS.md`, `TARJETA_JUNTA.md`). Si `clientes/{cliente}/` no existe,
+  `estrategia-copy` revisa `examples/{cliente}/` como alternativa (solo
+  relevante mientras se prueba con CiLi).
+
+Con esto: el brief de ejemplo de CiLi de julio 2026 vive en
+`examples/cili/cili_julio_2026.json`, su material de referencia en
+`examples/cili/cili_pilares_completo.md` y
+`examples/cili/reference_banco_temas_cili.md`, y su output del mes (cuando se
+corra de verdad) en `output/cili/julio_2026/`.
 
 ## IDENTIFICADOR DE POST (`post_id`) — para no emparejar por posición
 

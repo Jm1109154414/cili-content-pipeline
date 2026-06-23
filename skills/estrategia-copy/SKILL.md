@@ -18,13 +18,15 @@ referencia adicional descrito abajo.
 ## Entrada
 
 - El brief completo del cliente (JSON con las secciones A-F).
-- **Busca material de referencia propio del cliente** antes de generar: si
-  existen `briefs/{cliente}_pilares_completo.md` y/o
-  `prompts/reference_banco_temas_{cliente}.md`, úsalos igual que se describe
-  abajo para CiLi. CiLi es el primer cliente con este material
-  (`briefs/cili_pilares_completo.md` y `prompts/reference_banco_temas_cili.md`),
-  pero la regla aplica a cualquier cliente que tenga su propio archivo de
-  referencia, no es exclusiva de CiLi.
+- **Busca material de referencia propio del cliente** antes de generar (ver
+  "`briefs/` vs `clientes/{cliente}/` vs `examples/{cliente}/`" en
+  `PLAN_MAESTRO.md`): primero en `clientes/{cliente}/{cliente}_pilares_completo.md`
+  y `clientes/{cliente}/reference_banco_temas_{cliente}.md`; si no existe esa
+  carpeta, intenta `examples/{cliente}/` (solo aplica a clientes de
+  demostración, como CiLi). Si ninguno existe, sigue sin este material — no es
+  obligatorio. CiLi es el caso piloto que hoy vive en `examples/cili/`, pero
+  la regla aplica igual a cualquier cliente real con su propia carpeta en
+  `clientes/`.
 - Si existen meses anteriores del mismo cliente en `output/{cliente}/`, revísalos
   para **no repetir** temas ya publicados.
 

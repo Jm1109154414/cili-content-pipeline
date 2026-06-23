@@ -1,0 +1,54 @@
+{
+  "_instrucciones": "Borra este campo antes de guardar. Llena todos los campos. Los que dicen (opcional) puedes dejarlos vacío o como null. Guarda el archivo como briefs/{cliente}_{mes}_{año}.json",
+
+  "empresa": "",
+  "industria": "",
+  "ciudad": "",
+  "anos_mercado": 0,
+  "web": "",
+  "redes_sociales": {
+    "instagram": null,
+    "linkedin": null,
+    "facebook": null,
+    "tiktok": null
+  },
+  "descripcion": "",
+
+  "servicio_principal": "",
+  "servicio_secundario": null,
+  "precio_rango": null,
+  "que_incluye": [],
+  "duracion_o_entrega": null,
+  "diferenciadores": [],
+  "resultado_tipico": null,
+
+  "perfil_demografico": "",
+  "dolores": [],
+  "deseos": [],
+  "objeciones": [],
+  "nivel_conciencia": "sabe_problema",
+
+  "tono": "",
+  "colores_hex": [],
+  "estilo_visual": "",
+  "tres_palabras_marca": [],
+  "evitar": null,
+
+  "credenciales": null,
+  "testimonios": [],
+  "casos_exito": null,
+  "temas_que_funcionan": [],
+  "temas_a_evitar": [],
+  "competidores": [],
+
+  "mes": "",
+  "frecuencia_semanal": 5,
+  "plataformas": ["Instagram", "LinkedIn"],
+  "objetivo_mes": "leads",
+  "descripcion_objetivo": null,
+  "evento_especial": null,
+  "tema_semana_1": null,
+  "tema_semana_2": null,
+  "tema_semana_3": null,
+  "tema_semana_4": null
+}

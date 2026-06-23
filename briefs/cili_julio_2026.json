@@ -1,0 +1,85 @@
+{
+  "empresa": "CiLi — Continuous Improvement & Leadership Institute",
+  "industria": "Consultoría y capacitación empresarial — Lean Six Sigma",
+  "ciudad": "Guadalajara, Jalisco, México",
+  "anos_mercado": 15,
+  "web": "cili.org.mx",
+  "redes_sociales": {
+    "instagram": "@cili.institute",
+    "linkedin": "linkedin.com/company/cili",
+    "facebook": "facebook.com/CILI.Institute",
+    "tiktok": "@cili.institute"
+  },
+  "descripcion": "Instituto especializado en Lean Six Sigma, Mejora Continua y Liderazgo. Certificamos profesionales y transformamos organizaciones con nuestro modelo PMS IA — la evolución de la mejora continua integrada con Inteligencia Artificial.",
+  "servicio_principal": "Implementaciones PMS IA — transformación de procesos empresariales con IA integrada. Arquitecturas de agentes inteligentes, copilotos operativos y automatización con base en mejora continua.",
+  "servicio_secundario": "Certificaciones Lean Six Sigma con validez internacional: Yellow Belt, Green Belt, Black Belt, Master Black Belt. Certificados por CSSC, LATAMPC y STPS.",
+  "precio_rango": "Consultar según alcance del proyecto",
+  "que_incluye": [
+    "Diagnóstico inicial del proceso",
+    "Diseño del sistema PMS IA personalizado",
+    "Implementación con acompañamiento",
+    "Capacitación del equipo",
+    "Seguimiento post-implementación"
+  ],
+  "duracion_o_entrega": "Depende del alcance: desde 4 semanas hasta 6 meses",
+  "diferenciadores": [
+    "Modelo PMS propio — no herramientas genéricas de terceros",
+    "Instructores activos en la industria, no solo académicos",
+    "15 años de resultados documentados: +$121 MDD en ahorros y productividad",
+    "Único instituto que integra Lean Six Sigma con IA de forma estructurada",
+    "Modelo implementado en Philip Morris, Bimbo, Alpura, GE, Lear Corporation"
+  ],
+  "resultado_tipico": "Reducción de desperdicios y errores del 30-70%, implementación de IA en procesos clave, equipo certificado con metodología aplicada",
+  "perfil_demografico": "Gerentes de operaciones, directores de manufactura, directores de calidad y mejora continua. Empresas medianas y grandes en México y Latinoamérica. También profesionales individuales 28-50 años que buscan certificación para crecer.",
+  "dolores": [
+    "Procesos con errores que se repiten mes a mes sin solución definitiva",
+    "Quieren implementar IA en su empresa pero no saben cómo ni por dónde empezar sin arriesgarse",
+    "Equipos sin cultura de mejora continua — todo depende de una sola persona clave"
+  ],
+  "deseos": [
+    "Reducir costos operativos y desperdicios con una metodología probada y medible",
+    "Tener un sistema de gestión sólido que soporte la implementación de IA de forma ordenada",
+    "Certificar a su equipo con validez internacional y aplicación real, no solo teoría"
+  ],
+  "objeciones": [
+    "Ya intenté mejora continua antes y no funcionó — no confío en que esta vez sea diferente",
+    "No tengo tiempo ni presupuesto para capacitar a mi equipo ahora mismo",
+    "La IA es demasiado cara o técnicamente complicada para mi empresa"
+  ],
+  "nivel_conciencia": "sabe_problema",
+  "tono": "Profesional pero accesible. Basado en resultados y datos reales. Educativo — cada post enseña algo concreto. Motivacional sin ser superficial ni genérico.",
+  "colores_hex": ["#0B1120", "#FFFFFF", "#22D3EE"],
+  "estilo_visual": "Corporativo premium oscuro. Tipografía bold y limpia. Gráficas y datos visualizados. Sin fotos de stock genéricas — preferir diseño tipográfico, diagramas e infografías.",
+  "tres_palabras_marca": ["Confiable", "Experto", "Transformador"],
+  "evitar": "Promesas vacías sin datos que las respalden. Lenguaje técnico sin explicación. Contenido motivacional genérico tipo frase del día. Imágenes de personas sonriendo en oficina (stock photo obvio).",
+  "credenciales": "+2,000 personas certificadas en 13 países, +$121 MDD en ahorros y productividad generados, desde 2010, modelo implementado en Philip Morris México (toda LATAM y Canadá), Bimbo, Alpura, Grupo Gondi, Lear Corporation, General Electric, Daimler Chrysler.",
+  "testimonios": [
+    "Gabriel Arana, Master Black Belt: 'No he conocido ninguna organización como CiLi que no se enfoca en enseñarte solo herramientas, sino que te enseña a aplicar la mejora continua donde te desarrolles.'",
+    "Sebastián León, Black Belt: 'Los casos reales expuestos por los instructores me dieron una clara visión de cómo la mejora continua debe ser base de la cultura organizacional en la gestión de operaciones exitosas.'"
+  ],
+  "casos_exito": "2010: Philip Morris México — implementación del modelo PMS durante consolidación de operaciones. Resultado tan exitoso que fue adoptado por toda LATAM y Canadá dentro de la misma organización.",
+  "temas_que_funcionan": [
+    "Los 8 desperdicios de Lean — siempre genera engagement",
+    "Datos de ahorro concretos y casos reales",
+    "Diferencia entre hacer mejora continua bien vs mal",
+    "Testimonios de certificados contando su transformación"
+  ],
+  "temas_a_evitar": [
+    "Política o temas sociales controversiales",
+    "Críticas directas a competidores por nombre"
+  ],
+  "competidores": [
+    "CI Academy",
+    "Otras consultoras de Lean Six Sigma en México"
+  ],
+  "mes": "Julio 2026",
+  "frecuencia_semanal": 5,
+  "plataformas": ["Instagram", "LinkedIn", "Facebook", "TikTok"],
+  "objetivo_mes": "leads",
+  "descripcion_objetivo": "Posicionar PMS IA como la solución diferenciada para empresas que quieren implementar IA con orden, Y convertir leads calientes para las certificaciones de julio.",
+  "evento_especial": "Nueva generación de certificaciones Yellow, Green y Black Belt arranca julio 2026. Lugares limitados.",
+  "tema_semana_1": "Introducción — desperdicios, métricas y resultados de CiLi",
+  "tema_semana_2": "PMS IA — el sistema de gestión del futuro con IA integrada",
+  "tema_semana_3": "Certificaciones — guía para elegir la correcta y por qué vale la pena",
+  "tema_semana_4": "Casos de éxito y credibilidad — cierre y CTA final"
+}

@@ -12,6 +12,8 @@ están en [`PLAN_MAESTRO.md`](PLAN_MAESTRO.md) — léelo primero.
 | `briefs/FORMULARIO_ONBOARDING.md` | Guion de preguntas — base del skill conversacional de onboarding |
 | `briefs/_template_brief.json` | Plantilla vacía del brief de cliente |
 | `briefs/*.json` | Briefs de clientes ya capturados |
+| `briefs/cili_pilares_completo.md` | Dolores/deseos/certezas/avatar reales de CiLi + su framework propio de copywriting (P/B/C/S/TI/I/CN), extraído de `Pilares de contenido (2).xlsx` |
+| `prompts/reference_banco_temas_cili.md` | Banco real de temas por certificación (Yellow/Green/Black Belt) + 5 ejemplos ya redactados, extraído del mismo Excel |
 | `pipeline/brief_schema.py` | Valida que un brief esté completo y correcto (se queda en código) |
 | `pipeline/output_formatter.py` | Genera el Excel/MD/checklist final (se queda en código) |
 | `prompts/*.txt` | Prompts de referencia — insumo para escribir los SKILL.md de OpenClaw |

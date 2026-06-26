@@ -49,7 +49,11 @@ sección a lenguaje natural:
 - Sección B (oferta) → "¿Qué quieres vender más este mes? ¿Qué incluye y qué
   te hace diferente de la competencia?"
 - Sección C (cliente ideal) → "¿Quién es tu cliente típico, y qué problema
-  tiene que lo hace buscarte?"
+  tiene que lo hace buscarte? ¿Y hay alguien que claramente NO sea tu cliente
+  ideal, aunque a veces te contacten?" (esta última es opcional —
+  `anti_cliente` en el brief — útil para que el contenido no apunte
+  accidentalmente al público equivocado, pero no insistas si no se les
+  ocurre nada)
 - Sección D (marca) → "¿Cómo quieres que suene tu marca? ¿Hay algo que nunca
   deberíamos publicar?"
 - Sección E (credibilidad) → "¿Qué números o testimonios tienes para

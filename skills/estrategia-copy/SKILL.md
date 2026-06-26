@@ -148,10 +148,37 @@ en pantalla lleva todo el peso. Máximo 2 líneas visibles a la vez, 3-5
 palabras por línea, sincronizado con lo que se dice en ese momento (esto es
 insumo para quien edite el video, no solo para el copy).
 
+### Chequeo rápido de calidad antes de cerrar cada post
+
+**Test "¿y entonces qué?":** por cada afirmación del cuerpo, pregúntate si
+responde por qué le debería importar al lector. Una característica sin
+beneficio conectado no convence — agrega el puente que falta.
+
+> ❌ "Usamos un sistema de gestión de calidad certificado"
+> ✅ "Usamos un sistema certificado — por eso detectamos errores antes de
+> que lleguen a tu cliente, no después"
+
+**Sé específico, no vago:**
+
+| Vago | Específico |
+|---|---|
+| "Ahorra tiempo" | "Reduce 4 horas semanales de reportes" |
+| "Muchos clientes" | "+2,000 certificados" (usa cifras reales del brief) |
+| "Resultados rápidos" | "Resultados en 30 días" |
+| "Mejora tu proceso" | "Reduce desperdicio del proceso en un 30%" |
+
+**CTA con pérdida en vez de solo ganancia** (cuando el objetivo es
+`conversion`): a veces enmarcar lo que se pierde por no actuar funciona mejor
+que solo el beneficio de actuar. "No dejes que tus procesos sigan
+desperdiciando recursos" puede pegar más que "mejora tus procesos" — pero no
+fuerces esto si suena alarmista o no calza con el tono del cliente.
+
 ### Qué evitar siempre
 
 Respeta `evitar` y `temas_a_evitar` del brief sin excepción. No prometas
 resultados sin dato que los respalde. No uses lenguaje técnico sin explicarlo.
+**No uses el campo `competidores` del brief para inspirarte en críticas** —
+eso ya lo prohíbe `chequeo-marca`, pero evita la tentación desde la raíz.
 
 ## Salida esperada (JSON, una sola estructura)
 

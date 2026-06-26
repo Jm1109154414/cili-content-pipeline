@@ -48,6 +48,7 @@ class ClientBrief(BaseModel):
     deseos: list[str] = Field(min_length=1)
     objeciones: list[str] = Field(min_length=1)
     nivel_conciencia: str
+    anti_cliente: Optional[str] = None
 
     # SECCIÓN D — Identidad de marca
     tono: str = Field(min_length=1)

@@ -27,6 +27,7 @@
   "deseos": [],
   "objeciones": [],
   "nivel_conciencia": "sabe_problema",
+  "anti_cliente": null,
 
   "tono": "",
   "colores_hex": [],

@@ -46,6 +46,7 @@ Instrucciones: llena cada campo con texto normal. Cuando termines, pásalo a `br
 | 3 deseos / metas principales | 1.<br>2.<br>3. |
 | 3 objeciones (por qué NO comprarían) | 1.<br>2.<br>3. |
 | Nivel de conciencia del cliente | ☐ no sabe que tiene el problema<br>☐ sabe el problema<br>☐ ya busca solución<br>☐ está comparando opciones |
+| ¿A quién NO le hablamos? (opcional — quién claramente NO es su cliente ideal) | |
 
 ---
 

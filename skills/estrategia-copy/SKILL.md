@@ -99,11 +99,21 @@ código.
 
 ### Patrón de gancho/CTA
 
-El gancho es casi siempre **una pregunta directa al dolor o deseo del
-prospecto** ("¿Te imaginas un sistema que permita a tu equipo resolver
-problemas en tiempo real?"). El CTA cierra retomando esa misma pregunta como
-invitación a actuar ("¿Estás listo para implementar un sistema así?"). Sigue
-este patrón salvo que el objetivo del post sea puramente informativo/comunidad.
+El patrón validado en los ejemplos reales de CiLi es: **una pregunta directa
+al dolor o deseo del prospecto** ("¿Te imaginas un sistema que permita a tu
+equipo resolver problemas en tiempo real?"), con el CTA retomando esa misma
+pregunta como invitación a actuar. Úsalo como default, pero **no abuses de un
+solo patrón mes tras mes** — varía con estos otros tipos de gancho para que
+el contenido no se sienta repetitivo:
+
+- **Curiosidad:** "Esto es lo que nadie te dice sobre [tema]."
+- **Historia:** "La semana pasada nos pasó algo que cambió cómo vemos [tema]."
+- **Valor directo:** "3 señales de que tu proceso necesita [solución] (sin [dolor común])."
+- **Contrarian:** "Todo mundo dice [creencia común]. Está mal. Esto es lo que sí funciona."
+
+Elige el tipo de gancho según el `objetivo` del post: pregunta-al-dolor y
+valor directo funcionan mejor para `conversion`/`credibilidad`; curiosidad e
+historia para `educacion`/`comunidad`.
 
 ### Reglas por plataforma (obligatorias, no opcionales)
 
@@ -115,8 +125,28 @@ este patrón salvo que el objetivo del post sea puramente informativo/comunidad.
 - **Facebook:** 100-300 palabras, tono conversacional, cierra con una pregunta
   para generar comentarios, 1-3 hashtags.
 - **TikTok:** caption máximo 150 caracteres + hashtags, el guion del video
-  importa más que el caption — siempre incluye `script_video` con marcas de
-  tiempo `[0-3s]`, `[3-10s]`, etc.
+  importa más que el caption.
+
+### Guion de video corto (reel / video_corto / tiktok) — no dejes `script_video` vago
+
+**Regla de los 3 segundos:** los primeros 3 segundos deben combinar al mismo
+tiempo gancho visual + gancho verbal + texto en pantalla — si solo hay uno de
+los tres, se pierde el scroll. No empieces el guion con una introducción
+lenta ("Hola, hoy les voy a hablar de...").
+
+Usa una de estas 3 estructuras (con marcas de tiempo reales, no genéricas):
+
+- **Problema-solución** (15-30s): `[0-3s]` plantea el problema → `[3-10s]`
+  por qué importa → `[10-25s]` la solución/tip → `[25-30s]` CTA.
+- **Formato lista** (30-60s): `[0-3s]` "X cosas que..." → un punto cada
+  5-8 segundos → CTA al final.
+- **Tutorial** (30-60s): `[0-3s]` muestra el resultado final primero →
+  `[3-8s]` "así se hace" → pasos rápidos → resultado + CTA.
+
+**Subtítulos:** la mayoría ve sin sonido — el guion debe asumir que el texto
+en pantalla lleva todo el peso. Máximo 2 líneas visibles a la vez, 3-5
+palabras por línea, sincronizado con lo que se dice en ese momento (esto es
+insumo para quien edite el video, no solo para el copy).
 
 ### Qué evitar siempre
 

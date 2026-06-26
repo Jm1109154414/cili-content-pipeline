@@ -36,6 +36,14 @@ con el resto.
 
 ## Paso 1 — Construir el prompt de imagen (por post)
 
+Estructura el prompt siguiendo este orden — **Sujeto + Escenario + Estilo +
+Iluminación + Composición + Técnico** — así no se te olvida ningún elemento:
+
+> Ejemplo: "Bold typographic infographic [sujeto] on dark navy background
+> [escenario], minimalist corporate style [estilo], high contrast lighting
+> [iluminación], centered headline with supporting data point below
+> [composición], 1080x1350px clean vector aesthetic [técnico]."
+
 Para cada post, escribe un prompt en **inglés** para GPT Image 2 que incluya:
 
 - **Estilo:** uno de `tipographic | infographic | abstract | diagram | dark_corporate`,
